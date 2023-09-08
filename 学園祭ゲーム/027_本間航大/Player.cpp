@@ -40,49 +40,49 @@ void PlayerMove() {
 	key = GetJoypadInputState(DX_INPUT_KEY_PAD1);
 	// 下を押下 手前に移動
 	if (key & PAD_INPUT_DOWN) {
-		Player.move.x = 0.0f;
-		Player.move.z = -12.0f;
-		Player.direction = DOWN;
+//		Player.move.x = 0.0f;
+//		Player.move.z = -12.0f;
+//		Player.direction = DOWN;
 	}
 
 	// 上を押下 奥に移動
 	if (key & PAD_INPUT_UP) {
-		Player.move.x = 0.0f;
-		Player.move.z = 12.0f;
-		Player.direction = UP;
+//		Player.move.x = 0.0f;
+//		Player.move.z = 12.0f;
+//		Player.direction = UP;
 	}
 
 	// 左を押下 左に移動
 	if (key & PAD_INPUT_LEFT) {
-		Player.move.x = -12.0f;
-		Player.move.z = 0.0f;
-		Player.direction = LEFT;
+//		Player.move.x = -12.0f;
+//		Player.move.z = 0.0f;
+//		Player.direction = LEFT;
 		// 下を押下 手前に移動
 		if (key & PAD_INPUT_DOWN) {
-			Player.move.z = -12.0f;
-			Player.direction = 0.5f;
+//			Player.move.z = -12.0f;
+//			Player.direction = 0.5f;
 		}
 		// 上を押下 奥に移動
 		if (key & PAD_INPUT_UP) {
-			Player.move.z = 12.0f;
-			Player.direction = 1.5f;
+//			Player.move.z = 12.0f;
+//			Player.direction = 1.5f;
 		}
 	}
 
 	// 右方向への移動処理
 	if (key & PAD_INPUT_RIGHT) {
-		Player.move.x = 12.0f;
-		Player.move.z = 0.0f;
-		Player.direction = RIGHT;
+//		Player.move.x = 12.0f;
+//		Player.move.z = 0.0f;
+//		Player.direction = RIGHT;
 		// 下を押下 手前に移動
 		if (key & PAD_INPUT_DOWN) {
-			Player.move.z = -12.0f;
-			Player.direction = 3.5f;
+//			Player.move.z = -12.0f;
+//			Player.direction = 3.5f;
 		}
 		// 上を押下 奥に移動
 		if (key & PAD_INPUT_UP) {
-			Player.move.z = 12.0f;
-			Player.direction = 2.5f;
+//			Player.move.z = 12.0f;
+//			Player.direction = 2.5f;
 		}
 	}
 

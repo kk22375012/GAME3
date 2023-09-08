@@ -385,14 +385,14 @@ int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 				Enemy1.pos.z += Enemy1.move.z;
 
 				// カメラの視点操作
-				cpos.x = Player.pos.x;
-				cpos.y = Player.pos.y + 800.0f;
-				cpos.z = Player.pos.z - 1200.0f ;
+				cpos.x ;
+				cpos.y ;
+				cpos.z ;
 
 				// カメラの注視点操作
-				ctgt.x = Player.pos.x ;
-				ctgt.y = Player.pos.y + 50.0f ;
-				ctgt.z = Player.pos.z ;
+				ctgt.x = cpos.x ;
+				ctgt.y = cpos.y ;
+				ctgt.z = cpos.z;
 
 				// 背景(空)の操作
 				skypos.x = cpos.x;
@@ -428,7 +428,6 @@ int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 						MV1SetPosition(StageMap[y][x], VGet((x * 200.0f), ((MAP_Y - y) * 200.0f), 0.0f));
 					}
 				}
-				MV1SetPosition(StageMap[9][2], Player.pos);
 
 				// 描画
 				Draw();
