@@ -425,7 +425,7 @@ int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 
 				for (int y = 0; y < MAP_Y; y++) {
 					for (int x = 0; x < MAP_X; x++) {
-						MV1SetPosition(StageMap[y][x], VGet((x * 200.0f), ((MAP_Y - y) * 500.0f), 0.0f));
+						MV1SetPosition(StageMap[y][x], VGet((x * 200.0f), ((MAP_Y - y) * 200.0f), 0.0f));
 					}
 				}
 				MV1SetPosition(StageMap[9][2], Player.pos);
