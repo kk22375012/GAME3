@@ -129,8 +129,15 @@ int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 						
 		switch(gamemode){
 			case eSceneBlank :
-				gamemode = eScenePlay ;
-				break ;
+				gamemode = eSceneTitle;
+				break;
+
+			case eSceneTitle:
+				if (key & KEY_INPUT_SPACE) {
+					gamemode = eScenePlay;
+				}
+				break;
+
 			case eScenePlay :
 				// アニメーション進行
 				if(Player.mode != JUMPOUT){
