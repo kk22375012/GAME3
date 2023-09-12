@@ -134,11 +134,6 @@ void PlayerMove() {
 		Player.move.z *= 2.0f;
 	}
 
-	if (CheckHitKey(KEY_INPUT_SPACE) == 1) {
-		printf("%0.4f|", Player.pos.x);
-		printf("%0.4f\n", Player.pos.z);
-	}
-
 	if (Player.pos.x < -5300.0f) {
 		if (Player.move.x < 0.0)
 			Player.move.x = 0.0f;

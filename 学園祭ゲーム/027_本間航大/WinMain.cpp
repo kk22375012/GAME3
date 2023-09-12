@@ -109,11 +109,11 @@ int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
     for(int i = 0 ; i < MeshNum ; i ++ ){
 	// メッシュに含まれる頂点のローカル座標の最大座標値を描画
 		Position = MV1GetMeshMaxPosition( stagedata, i ) ;
-		DrawFormatString( 0, 112, GetColor( 255,255,255 ), "Max Position          x %f  y %f  z %f", Position.x, Position.y, Position.z ) ;
+//		DrawFormatString( 0, 112, GetColor( 255,255,255 ), "Max Position          x %f  y %f  z %f", Position.x, Position.y, Position.z ) ;
 
 		// メッシュに含まれる頂点のローカル座標の最小座標値を描画
 		Position = MV1GetMeshMinPosition( stagedata, i ) ;
-		DrawFormatString( 0, 128, GetColor( 255,255,255 ), "Min Position          x %f  y %f  z %f", Position.x, Position.y, Position.z ) ;
+//		DrawFormatString( 0, 128, GetColor( 255,255,255 ), "Min Position          x %f  y %f  z %f", Position.x, Position.y, Position.z ) ;
 
 	}
 	/* ------------------------------------------------------------------------------------------------
@@ -128,16 +128,33 @@ int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 						
 		switch(gamemode){
 			case eSceneBlank :
-				gamemode = eScenePlay;
+				gamemode = eSceneTitle;
 				break;
 
 			case eSceneTitle:
+
 				if (CheckHitKey(KEY_INPUT_SPACE) == 1) {
 					gamemode = eSceneChoice;
 				}
 				break;
 
 			case eSceneChoice:
+				cpos = VGet(0.0f, 1000.0f, -100.0f);
+				ctgt = VGet(0.0f, 500.0f, 0.0f);
+				cadd = VGet(0.0f, 0.0f, 0.0f);
+
+				Player.pos = VGet(200.0f, 200.0f, 0.0f);
+				Enemy1.pos = VGet(600.0f, 300.0f, 200.0f);
+
+				// モデルの移動(配置)
+				MV1SetRotationXYZ(Player.model, VGet(0.0f, 1.57f * Player.direction, 0.0f));
+				MV1SetPosition(Player.model, Player.pos);
+				MV1SetRotationXYZ(Enemy1.model, VGet(0.0f, 1.57f * Enemy1.direction, 0.0f));
+				MV1SetPosition(Enemy1.model, Enemy1.pos);
+
+				Draw();
+				ScreenFlip();
+
 				if (CheckHitKey(KEY_INPUT_RETURN) == 1) {
 					gamemode = eScenePlay;
 				}
@@ -145,7 +162,6 @@ int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 
 			case eScenePlay :
 				// アニメーション進行
-				printf("aaaa");
 				if(Player.mode != JUMPOUT){
 					Player.playtime += 0.5f ;
 				}
@@ -424,7 +440,7 @@ int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 				MV1SetPosition(Player.model,Player.pos);
 
 				// モデルの回転
-				MV1SetRotationXYZ(Enemy1.model,VGet(0.0f,1.57f * Enemy1.direction,0.0f)) ;
+				MV1SetRotationXYZ(Enemy1.model, VGet(0.0f, 1.57f * Enemy1.direction, 0.0f));
 				// モデルの移動(配置)
 				MV1SetPosition(Enemy1.model,Enemy1.pos);
 

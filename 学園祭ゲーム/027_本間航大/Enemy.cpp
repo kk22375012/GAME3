@@ -10,7 +10,7 @@ void Enemy1Init() {
 	//		キャラ情報セット		//
 	// ---------------------------- // 
 	Enemy1.pos = VGet(1000.0f, 0.0f, -400.0f);
-	Enemy1.direction = DOWN;
+	Enemy1.direction = UP;
 	Enemy1.mode = E_STAND;
 	Enemy1.charahitinfo.Height = PC_HEIGHT;
 	Enemy1.charahitinfo.Width = PC_WIDTH;
