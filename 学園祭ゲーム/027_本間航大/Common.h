@@ -90,6 +90,7 @@ enum SceneName
 {
 	eSceneBlank = -1 ,
 	eSceneTitle ,
+	eSceneChoice , 
 	eScenePlay ,
 	eSceneClear ,
 	eSceneOver ,
