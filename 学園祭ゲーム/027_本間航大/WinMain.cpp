@@ -133,13 +133,20 @@ int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 				break;
 
 			case eSceneTitle:
-				if (key & KEY_INPUT_SPACE) {
+				if (CheckHitKey(KEY_INPUT_SPACE) == 1) {
+					gamemode = eSceneChoice;
+				}
+				break;
+
+			case eSceneChoice:
+				if (CheckHitKey(KEY_INPUT_RETURN) == 1) {
 					gamemode = eScenePlay;
 				}
 				break;
 
 			case eScenePlay :
 				// アニメーション進行
+				printf("aaaa");
 				if(Player.mode != JUMPOUT){
 					Player.playtime += 0.5f ;
 				}
