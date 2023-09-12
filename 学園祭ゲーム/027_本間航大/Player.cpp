@@ -43,6 +43,7 @@ void PlayerMove() {
 //		Player.move.x = 0.0f;
 //		Player.move.z = -12.0f;
 //		Player.direction = DOWN;
+		cpos.z += 12.0f;
 	}
 
 	// 上を押下 奥に移動
@@ -50,6 +51,7 @@ void PlayerMove() {
 //		Player.move.x = 0.0f;
 //		Player.move.z = 12.0f;
 //		Player.direction = UP;
+		cpos.z -= 12.0f;
 	}
 
 	// 左を押下 左に移動
@@ -57,6 +59,7 @@ void PlayerMove() {
 //		Player.move.x = -12.0f;
 //		Player.move.z = 0.0f;
 //		Player.direction = LEFT;
+		cpos.x += 12.0f;
 		// 下を押下 手前に移動
 		if (key & PAD_INPUT_DOWN) {
 //			Player.move.z = -12.0f;
@@ -74,6 +77,7 @@ void PlayerMove() {
 //		Player.move.x = 12.0f;
 //		Player.move.z = 0.0f;
 //		Player.direction = RIGHT;
+		cpos.x -= 12.0f;
 		// 下を押下 手前に移動
 		if (key & PAD_INPUT_DOWN) {
 //			Player.move.z = -12.0f;
@@ -113,11 +117,16 @@ void PlayerMove() {
 
 	// JUMPボタン Wキー
 	if (key & PAD_INPUT_8) {
-		AnimationPlayer(JUMPIN);
-		Player.playtime = 0.0f;
-		Player.anim_totaltime = MV1GetAnimTotalTime(Player.model, Player.attachidx);
+//		AnimationPlayer(JUMPIN);
+//		Player.playtime = 0.0f;
+//		Player.anim_totaltime = MV1GetAnimTotalTime(Player.model, Player.attachidx);
+		
+//		MV1SetAttachAnimTime(Player.model, Player.attachidx, Player.playtime);
+		cpos.y += 12.0f;
+	}
 
-		MV1SetAttachAnimTime(Player.model, Player.attachidx, Player.playtime);
+	if (key & PAD_INPUT_5) {
+		cpos.y -= 12.0f;
 	}
 
 	if (CheckHitKey(KEY_INPUT_LSHIFT) == 1) {

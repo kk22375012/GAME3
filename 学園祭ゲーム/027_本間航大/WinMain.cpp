@@ -15,7 +15,6 @@ int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 	VECTOR skypos = VGet(0.0f, 0.0f, 0.0f);
 		
 		
-	VECTOR cpos, ctgt, cadd;
 	// カメラポジション cpos:カメラ位置　ctgt:カメラ注視点
 	if(CHOICESTAGE == 1){
 		cpos = VGet(0.0f,1400.0f,0.0f) ;
@@ -129,7 +128,7 @@ int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 						
 		switch(gamemode){
 			case eSceneBlank :
-				gamemode = eSceneTitle;
+				gamemode = eScenePlay;
 				break;
 
 			case eSceneTitle:
@@ -398,8 +397,8 @@ int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 
 				// カメラの注視点操作
 				ctgt.x = cpos.x ;
-				ctgt.y = cpos.y ;
-				ctgt.z = cpos.z;
+				ctgt.y = cpos.y - 500.0f ;
+				ctgt.z = cpos.z - 1000.0f;
 
 				// 背景(空)の操作
 				skypos.x = cpos.x;
@@ -410,7 +409,7 @@ int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 				if (Enemy1.direction < 0.0f) Enemy1.direction += 4.0f;
 				if (Enemy1.direction > 4.0f) Enemy1.direction -= 4.0f;
 
-				SetCameraPositionAndTargetAndUpVec(cpos,ctgt,VGet(0.0f,0.0f,1.0f)) ;
+				SetCameraPositionAndTargetAndUpVec(cpos,ctgt,VGet(0.0f,1.0f,0.0f)) ;
 
 				// モデルの回転
 				MV1SetRotationXYZ(Player.model,VGet(0.0f,1.57f * Player.direction,0.0f)) ;
