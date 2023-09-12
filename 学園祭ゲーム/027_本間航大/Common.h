@@ -179,9 +179,13 @@ extern SCharaInfo Player;
 extern SWeaponInfo PlayerSabel;
 extern int WeponAttachFrameNum;
 
-
 // --- エネミー
 extern SCharaInfo Enemy1;
+
+// --- カメラ
+extern VECTOR cpos;
+extern VECTOR ctgt;
+extern VECTOR cadd;
 
 // --- キー入力
 extern int key;
