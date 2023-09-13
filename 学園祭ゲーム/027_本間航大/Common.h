@@ -52,7 +52,7 @@
 #define WEAPON_WIDTH 6.0f
 
 // プレイヤーの移動攻撃時の加速
-#define PLAYER_ATTACK_SPEED 16.0f
+#define Player_ATTACK_SPEED 16.0f
 
 // エネミーの怯み移動
 #define ENEMY_KNOCKBACK 15.0f
@@ -140,7 +140,7 @@ enum EnemyMode
 // --- アニメーション
 extern void AnimationInit();
 extern void AnimationPlayer(int);
-extern void AnimationEnemy1(int);
+extern void AnimationEnemy(int);
 
 // --- プレイヤー
 extern void PlayerInit();
@@ -150,7 +150,7 @@ extern void PlayerMove();
 extern void WeaponInit();
 
 // --- エネミー
-extern void Enemy1Init();
+extern void EnemyInit();
 
 // --- モデルとの当たり判定
 extern void HitPolygonSearch();
@@ -178,14 +178,12 @@ extern int plyanim_attack;
 extern int gobanim_ntural, gobanim_blowin, gobanim_blowloop, gobanim_blowout;
 
 // --- プレイヤー
-extern SCharaInfo Player;
+extern SCharaInfo Player[2];
 
 // --- 武器
 extern SWeaponInfo PlayerSabel;
 extern int WeponAttachFrameNum;
 
-// --- エネミー
-extern SCharaInfo Enemy1;
 
 // --- カメラ
 extern VECTOR cpos;

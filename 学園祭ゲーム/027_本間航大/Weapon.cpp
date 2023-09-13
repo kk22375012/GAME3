@@ -12,7 +12,7 @@ void WeaponInit() {
 	PlayerSabel.weaponhitinfo.Width = 3.5f;
 	PlayerSabel.weaponhitinfo.Height = -88.0f;
 
-	WeponAttachFrameNum = MV1SearchFrame(Player.model, "wp");	// 武器をアタッチするモデルのアタッチするフレームを探す
+	WeponAttachFrameNum = MV1SearchFrame(Player[0].model, "wp");	// 武器をアタッチするモデルのアタッチするフレームを探す
 }
 
 
