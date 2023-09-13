@@ -1,4 +1,15 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(513,5): warning MSB8028: 中間ディレクトリ (Debug\) に別のプロジェクト (027_本間航大.vcxproj) と共有されているファイルが含まれています。これにより、クリーンしてリビルド動作が適切に行われない可能性があります。
+  Animation.cpp
+  Camera.cpp
+  Common.cpp
+  ConsoleWindow.cpp
+  Draw.cpp
+  Enemy.cpp
+  HitCheck.cpp
+  Player.cpp
+  Weapon.cpp
   WinMain.cpp
-C:\Users\koyama\Desktop\学園祭ゲーム\学園祭ゲーム\027_本間航大\WinMain.cpp(9,7): warning C4101: 'str': ローカル変数は 1 度も使われていません。
-  027_本間航大.vcxproj -> C:\Users\koyama\Desktop\学園祭ゲーム\学園祭ゲーム\Debug\学園祭ゲーム.exe
+C:\school\gakuensai\学園祭ゲーム\027_本間航大\WinMain.cpp(9,7): warning C4101: 'str': ローカル変数は 1 度も使われていません。
+  コードを生成中...
+  LINK : 前回のインクリメンタル リンクで C:\school\gakuensai\学園祭ゲーム\Debug\学園祭ゲーム.exe が見つからなかったか、ビルドされませんでした。フル リンクを行います。
+  027_本間航大.vcxproj -> C:\school\gakuensai\学園祭ゲーム\Debug\学園祭ゲーム.exe
