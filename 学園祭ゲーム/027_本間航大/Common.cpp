@@ -106,7 +106,8 @@ VECTOR cpos;
 VECTOR ctgt;
 VECTOR cadd;
 
-// --- °‚Ì“–‚½‚è”»’è
+// --- ƒ‚ƒfƒ‹‚Æ‚Ì“–‚½‚è”»’è
+void HitPolygonSearch();
 int FloorSearch();
 void E1_FloorSearch();
 

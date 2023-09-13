@@ -16,15 +16,9 @@ int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 		
 		
 	// カメラポジション cpos:カメラ位置　ctgt:カメラ注視点
-	if(CHOICESTAGE == 1){
-		cpos = VGet(0.0f,1400.0f,0.0f) ;
-		ctgt = VGet(0.0f,500.0f,-400.0f) ;
-		cadd = VGet(0.0f, 0.0f, 0.0f);
-	}
-	else{
-		cpos = VGet(500.0f,1501.0f,1800.0f) ;
-		ctgt = VGet(500.0f,800.0f,2800.0f) ; // 洞窟
-	}
+	cpos = VGet(0.0f,1400.0f,0.0f) ;
+	ctgt = VGet(0.0f,500.0f,-400.0f) ;
+	cadd = VGet(0.0f, 0.0f, 0.0f);
 
 	VECTOR Position ;
 
@@ -42,59 +36,40 @@ int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 	Enemy1Init();
 
 	// ステージ情報の読み込み
-	if(CHOICESTAGE == 1){
-		stagedata = MV1LoadModel("..\\Data\\Stage\\Stage00.mv1") ;
-		skydata = MV1LoadModel("..\\Data\\Stage\\Stage00_sky.mv1");
-		MV1SetUseZBuffer(skydata, false);
-		// ブロックモデルの読み込み
-		blockdate[TATAMI_BLOCK] = MV1LoadModel("..\\Data\\Stage\\畳.mv1");
-		// マップデータに反映
-		for (int y = 0; y < 10; y++) {
-			for (int x = 0; x < 10; x++) {
-				switch (StageMap[y][x]) {
-					case TATAMI_BLOCK :
-						StageMap[y][x] = MV1DuplicateModel(blockdate[TATAMI_BLOCK]);
-						break;
-				}
+	stagedata = MV1LoadModel("..\\Data\\Stage\\Stage00.mv1") ;
+	skydata = MV1LoadModel("..\\Data\\Stage\\Stage00_sky.mv1");
+	MV1SetUseZBuffer(skydata, false);
+	// ブロックモデルの読み込み
+	blockdate[TATAMI_BLOCK] = MV1LoadModel("..\\Data\\Stage\\畳.mv1");
+	// マップデータに反映
+	for (int y = 0; y < 10; y++) {
+		for (int x = 0; x < 10; x++) {
+			switch (StageMap[y][x]) {
+				case TATAMI_BLOCK :
+					StageMap[y][x] = MV1DuplicateModel(blockdate[TATAMI_BLOCK]);
+					break;
 			}
 		}
-
-
-
-		// シャドウマップハンドルの作成
-
-
-		// ライトの方向を設定
-		SetLightDirection( VGet( 0.5f, -0.5f, -0.5f ) );
-		ShadowMapHandle = MakeShadowMap( 1024, 1024 ) ;
-
-		// シャドウマップが想定するライトの方向もセット
-		SetShadowMapLightDirection( ShadowMapHandle, VGet( 0.5f, -0.5f, 0.5f ) ) ;
-
-		// シャドウマップに描画する範囲を設定
-		SetShadowMapDrawArea( ShadowMapHandle, VGet( -1000.0f, -10.0f, -1000.0f ), VGet( 1000.0f, 1000.0f, 1000.0f ) ) ;
-
-		stagedata_c = MV1LoadModel("..\\Data\\Stage\\Stage00_c.mv1") ;
-		if(stagedata == -1) return -1 ;
 	}
-	else{
-		stagedata = MV1LoadModel("..\\Data\\Stage\\Stage01.mv1") ;
-		// シャドウマップハンドルの作成
 
 
-		// ライトの方向を設定
-		SetLightDirection( VGet( -0.5f, -0.5f, 0.5f ) );
-		ShadowMapHandle = MakeShadowMap( 1024, 1024 ) ;
 
-		// シャドウマップが想定するライトの方向もセット
-		SetShadowMapLightDirection( ShadowMapHandle, VGet( 0.5f, -0.5f, 0.5f ) ) ;
+	// シャドウマップハンドルの作成
 
-		// シャドウマップに描画する範囲を設定
-		SetShadowMapDrawArea( ShadowMapHandle, VGet( -1000.0f, -1.0f, -1000.0f ), VGet( 1000.0f, 1000.0f, 1000.0f ) ) ;
 
-		stagedata_c = MV1LoadModel("..\\Data\\Stage\\Stage01_c.mv1") ;
-		if(stagedata == -1) return -1 ;	
-	}
+	// ライトの方向を設定
+	SetLightDirection( VGet( 0.5f, -0.5f, -0.5f ) );
+	ShadowMapHandle = MakeShadowMap( 1024, 1024 ) ;
+
+	// シャドウマップが想定するライトの方向もセット
+	SetShadowMapLightDirection( ShadowMapHandle, VGet( 0.5f, -0.5f, -0.5f ) ) ;
+
+	// シャドウマップに描画する範囲を設定
+	SetShadowMapDrawArea( ShadowMapHandle, VGet( -5000.0f, -10.0f, -6000.0f ), VGet( 5000.0f, 1000.0f, 5000.0f ) ) ;
+
+	stagedata_c = MV1LoadModel("..\\Data\\Stage\\Stage00_c.mv1") ;
+	if(stagedata == -1) return -1 ;
+
 	// モデル全体のコリジョン情報のセットアップ
 	MV1SetupCollInfo( stagedata, -1 ) ;
 
@@ -324,40 +299,8 @@ int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 					}
 				}
 
-
-				HitDim = MV1CollCheck_Sphere( stagedata, -1, Player.pos, CHARA_ENUM_DEFAULT_SIZE + VSize( Player.move ) ) ;
-				WallNum = 0 ;
-				FloorNum = 0 ;
-				// 検出されたポリゴンの数だけ繰り返し
-				for(int i = 0 ; i < HitDim.HitNum ; i ++ ){
-					// ＸＺ平面に垂直かどうかはポリゴンの法線のＹ成分が０に限りなく近いかどうかで判断する
-					if( HitDim.Dim[i].Normal.y < 0.000001f && HitDim.Dim[i].Normal.y > -0.000001f ){
-						printf("壁扱い\n") ;
-						// 壁ポリゴンと判断された場合でも、キャラクターのＹ座標＋１．０ｆより高いポリゴンのみ当たり判定を行う
-						if( HitDim.Dim[i].Position[0].y > Player.pos.y + 1.0f ||
-							HitDim.Dim[i].Position[1].y > Player.pos.y + 1.0f ||
-							HitDim.Dim[i].Position[2].y > Player.pos.y + 1.0f ){
-							// ポリゴンの数が列挙できる限界数に達していなかったらポリゴンを配列に追加
-							if( WallNum < CHARA_MAX_HITCOLL ){
-								// ポリゴンの構造体のアドレスを壁ポリゴンポインタ配列に保存する
-								Wall[WallNum] = &HitDim.Dim[i] ;
-
-								// 壁ポリゴンの数を加算する
-								WallNum ++ ;
-							}
-						}
-					}
-					else{
-						// ポリゴンの数が列挙できる限界数に達していなかったらポリゴンを配列に追加
-						if( FloorNum < CHARA_MAX_HITCOLL ){
-							// ポリゴンの構造体のアドレスを床ポリゴンポインタ配列に保存する
-							Floor[FloorNum] = &HitDim.Dim[i] ;
-
-							// 床ポリゴンの数を加算する
-							FloorNum ++ ;
-						}
-					}
-				}
+				// モデルと接触したポリゴンの検出
+				HitPolygonSearch();
 				
 				// 床ポリゴンとの当たり判定
 				if( FloorNum != 0 ){
@@ -418,7 +361,7 @@ int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 
 				// 背景(空)の操作
 				skypos.x = cpos.x;
-				skypos.y = cpos.y - 5000.0f;
+				skypos.y = cpos.y;
 				skypos.z = cpos.z;
 
 				// エネミーの向きの限定

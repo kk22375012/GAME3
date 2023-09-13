@@ -8,12 +8,7 @@ void PlayerInit() {
 	// ---------------------------- // 
 	//		キャラ情報セット		//
 	// ---------------------------- //
-	if (CHOICESTAGE == 1) {
-		Player.pos = VGet(0.0f, 500.0f, 0.0f);		 // 草原
-	}
-	else {
-		Player.pos = VGet(500.0f, 800.0f, 2800.0f); // 洞窟
-	}
+	Player.pos = VGet(0.0f, 500.0f, 0.0f);		 // 草原
 	Player.mode = STAND;
 	Player.direction = DOWN;
 	Player.charahitinfo.Height = PC_HEIGHT;
@@ -111,6 +106,11 @@ void PlayerMove() {
 		MV1SetAttachAnimTime(Player.model, Player.attachidx, Player.playtime);
 	}
 */
+	if (CheckHitKey(KEY_INPUT_SPACE) == 1) {
+		Player.move.y = 1200.0f;
+		printf("aaaaaaaa");
+	}
+
 	if (CheckHitKey(KEY_INPUT_LSHIFT) == 1) {
 		Player.move.x *= 2.0f;
 		Player.move.z *= 2.0f;
@@ -120,7 +120,7 @@ void PlayerMove() {
 		if (Player.move.x < 0.0)
 			Player.move.x = 0.0f;
 	}
-	if (Player.pos.x > 6150.0f) {
+	if (Player.pos.x > 6640.0f) {
 		if (Player.move.x > 0.0)
 			Player.move.x = 0.0f;
 	}
