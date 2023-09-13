@@ -131,6 +131,7 @@ int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 				ScreenFlip();
 
 				if (CheckHitKey(KEY_INPUT_RETURN) == 1) {
+					Player.pos = VGet(200.0f, 200.0f, -1000.0f);
 					gamemode = eScenePlay;
 				}
 				break;
