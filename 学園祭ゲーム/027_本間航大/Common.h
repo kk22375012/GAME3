@@ -151,8 +151,7 @@ extern void WeaponInit();
 // --- エネミー
 extern void Enemy1Init();
 
-// --- モデルとの当たり判定
-extern void HitPolygonSearch();
+// --- 床の当たり判定
 extern int FloorSearch();
 extern void E1_FloorSearch();
 

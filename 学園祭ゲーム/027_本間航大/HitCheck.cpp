@@ -2,45 +2,6 @@
 #include "Common.h"
 
 // ------------------------------------------------------------------------ //
-//					モデルと接触したポリゴンの検出ポリゴン					//
-// ------------------------------------------------------------------------ //
-void HitPolygonSearch() {
-	HitDim = MV1CollCheck_Sphere(stagedata, -1, Player.pos, CHARA_ENUM_DEFAULT_SIZE + VSize(Player.move));
-	WallNum = 0;
-	FloorNum = 0;
-	// 検出されたポリゴンの数だけ繰り返し
-	for (int i = 0; i < HitDim.HitNum; i++) {
-		// ＸＺ平面に垂直かどうかはポリゴンの法線のＹ成分が０に限りなく近いかどうかで判断する
-		if (HitDim.Dim[i].Normal.y < 0.000001f && HitDim.Dim[i].Normal.y > -0.000001f) {
-			printf("壁扱い\n");
-			// 壁ポリゴンと判断された場合でも、キャラクターのＹ座標＋１．０ｆより高いポリゴンのみ当たり判定を行う
-			if (HitDim.Dim[i].Position[0].y > Player.pos.y + 1.0f ||
-				HitDim.Dim[i].Position[1].y > Player.pos.y + 1.0f ||
-				HitDim.Dim[i].Position[2].y > Player.pos.y + 1.0f) {
-				// ポリゴンの数が列挙できる限界数に達していなかったらポリゴンを配列に追加
-				if (WallNum < CHARA_MAX_HITCOLL) {
-					// ポリゴンの構造体のアドレスを壁ポリゴンポインタ配列に保存する
-					Wall[WallNum] = &HitDim.Dim[i];
-
-					// 壁ポリゴンの数を加算する
-					WallNum++;
-				}
-			}
-		}
-		else {
-			// ポリゴンの数が列挙できる限界数に達していなかったらポリゴンを配列に追加
-			if (FloorNum < CHARA_MAX_HITCOLL) {
-				// ポリゴンの構造体のアドレスを床ポリゴンポインタ配列に保存する
-				Floor[FloorNum] = &HitDim.Dim[i];
-
-				// 床ポリゴンの数を加算する
-				FloorNum++;
-			}
-		}
-	}
-}
-
-// ------------------------------------------------------------------------ //
 //						プレイヤーの床へのヒットチェック					//
 // ------------------------------------------------------------------------ //
 int FloorSearch() {
