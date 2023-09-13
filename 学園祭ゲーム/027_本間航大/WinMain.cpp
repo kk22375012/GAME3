@@ -1,14 +1,14 @@
 
 #include "Common.h"		// --- 全ファイルでの共通ヘッダー
-#include "../../../../../Program Files/DxLib/DxLib.h"
+
 
 int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 	
 	int stagedata_c ;
 	float camera_direction = 0.0f;
-	float LightPositionX = Player.pos.x;
-	float LightPositionY = Player.pos.y;
-	float LightPositionZ = Player.pos.z;
+	float LightPositionX = Player[0].pos.x;
+	float LightPositionY = Player[0].pos.y;
+	float LightPositionZ = Player[0].pos.z;
 
 	char str[100];
 	// 全体的なゲームの管理
@@ -44,11 +44,9 @@ int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 	skydata = MV1LoadModel("..\\Data\\Stage\\Stage00_sky.mv1");
 	MV1SetUseZBuffer(skydata, false);
 	// ブロックモデルの読み込み
-<<<<<<< HEAD
-	blockdate[TATAMI_BLOCK] = MV1LoadModel("..\\Data\\Stage\\畳.mv1");
-=======
+
 	blockdate[TATAMI_BLOCK] = MV1LoadModel("..\\Data\\Stage\\たたみ.mv1");
->>>>>>> a7347d45580869c4bc2835f012c9a3eed6d10584
+
 	// マップデータに反映
 	for (int y = 0; y < 10; y++) {
 		for (int x = 0; x < 10; x++) {
@@ -62,7 +60,7 @@ int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 
 
 
-<<<<<<< HEAD
+
 	// ポイントライト
 	Position = VGet(LightPositionX, LightPositionY, LightPositionZ);
 	float Range = 10.0f;			// ライトの有効範囲
@@ -330,10 +328,9 @@ int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 					}
 				}
 
-<<<<<<< HEAD
+
 				// モデルと接触したポリゴンの検出
 				HitPolygonSearch();
-=======
 
 				HitDim = MV1CollCheck_Sphere( stagedata, -1, Player[0].pos, CHARA_ENUM_DEFAULT_SIZE + VSize( Player[0].move ) ) ;
 				WallNum = 0 ;
@@ -368,7 +365,7 @@ int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 						}
 					}
 				}
->>>>>>> a7347d45580869c4bc2835f012c9a3eed6d10584
+
 				
 				// 床ポリゴンとの当たり判定
 				if( FloorNum != 0 ){
