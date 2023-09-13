@@ -79,6 +79,7 @@
 #include "math.h"
 #include <ctime>        // time
 #include <cstdlib>      // srand,rand
+#include "../../../../../Program Files/DxLib/DxLib.h"
 /* -----------------------------------------------------------------------------------------
 |
 |       å^êÈåæ

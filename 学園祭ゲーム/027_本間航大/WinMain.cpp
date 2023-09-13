@@ -1,5 +1,6 @@
 
 #include "Common.h"		// --- 全ファイルでの共通ヘッダー
+#include "../../../../../Program Files/DxLib/DxLib.h"
 
 int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 	
