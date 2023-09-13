@@ -414,14 +414,7 @@ int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 				Enemy1.pos.z += Enemy1.move.z;
 
 				// カメラの視点操作
-				cpos.x ;
-				cpos.y ;
-				cpos.z ;
-
-				// カメラの注視点操作
-				ctgt.x = cpos.x ;
-				ctgt.y = cpos.y - 500.0f ;
-				ctgt.z = cpos.z - 1000.0f;
+				CameraMove();
 
 				// 背景(空)の操作
 				skypos.x = cpos.x;

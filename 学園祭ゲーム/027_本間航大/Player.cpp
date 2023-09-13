@@ -24,7 +24,7 @@ void PlayerInit() {
 	// ---------------------------- // 
 	//		キャラモデルセット		//
 	// ---------------------------^ // 
-	Player.model = MV1LoadModel("..\\Data\\Player\\PC.mv1");
+	Player.model = MV1LoadModel("..\\Data\\Ninja\\忍者.mv1");
 	Player.attachidx = MV1AttachAnim(Player.model, 0, plyanim_nutral);
 	Player.anim_totaltime = MV1GetAttachAnimTotalTime(Player.model, Player.attachidx);
 	// アニメーションして動いてもその場で動いてるような状態
@@ -40,58 +40,54 @@ void PlayerMove() {
 	key = GetJoypadInputState(DX_INPUT_KEY_PAD1);
 	// 下を押下 手前に移動
 	if (key & PAD_INPUT_DOWN) {
-//		Player.move.x = 0.0f;
-//		Player.move.z = -12.0f;
-//		Player.direction = DOWN;
-		cpos.z += 12.0f;
+		Player.move.x = 0.0f;
+		Player.move.z = +12.0f;
+		Player.direction = DOWN;
 	}
 
 	// 上を押下 奥に移動
 	if (key & PAD_INPUT_UP) {
-//		Player.move.x = 0.0f;
-//		Player.move.z = 12.0f;
-//		Player.direction = UP;
-		cpos.z -= 12.0f;
+		Player.move.x = 0.0f;
+		Player.move.z = -12.0f;
+		Player.direction = UP;
 	}
 
 	// 左を押下 左に移動
 	if (key & PAD_INPUT_LEFT) {
-//		Player.move.x = -12.0f;
-//		Player.move.z = 0.0f;
-//		Player.direction = LEFT;
-		cpos.x += 12.0f;
+		Player.move.x = +12.0f;
+		Player.move.z = 0.0f;
+		Player.direction = LEFT;
 		// 下を押下 手前に移動
 		if (key & PAD_INPUT_DOWN) {
-//			Player.move.z = -12.0f;
-//			Player.direction = 0.5f;
+			Player.move.z = 12.0f;
+			Player.direction = 0.5f;
 		}
 		// 上を押下 奥に移動
 		if (key & PAD_INPUT_UP) {
-//			Player.move.z = 12.0f;
-//			Player.direction = 1.5f;
+			Player.move.z = -12.0f;
+			Player.direction = 1.5f;
 		}
 	}
 
 	// 右方向への移動処理
 	if (key & PAD_INPUT_RIGHT) {
-//		Player.move.x = 12.0f;
-//		Player.move.z = 0.0f;
-//		Player.direction = RIGHT;
-		cpos.x -= 12.0f;
+		Player.move.x = -12.0f;
+		Player.move.z = 0.0f;
+		Player.direction = RIGHT;
 		// 下を押下 手前に移動
 		if (key & PAD_INPUT_DOWN) {
-//			Player.move.z = -12.0f;
-//			Player.direction = 3.5f;
+			Player.move.z = +12.0f;
+			Player.direction = 3.5f;
 		}
 		// 上を押下 奥に移動
 		if (key & PAD_INPUT_UP) {
-//			Player.move.z = 12.0f;
-//			Player.direction = 2.5f;
+			Player.move.z = -12.0f;
+			Player.direction = 2.5f;
 		}
 	}
 
 	// 攻撃ボタン Dキー
-	if (key & PAD_INPUT_6) {
+/*	if (key & PAD_INPUT_6) {
 		if (Player.mode == RUN) {
 			if ((Player.direction >= 0) & (Player.direction < 1)) {
 				Player.move.z += (Player.direction - 1) * PLAYER_ATTACK_SPEED;
@@ -114,21 +110,7 @@ void PlayerMove() {
 		Player.playtime = 0.0f;
 		MV1SetAttachAnimTime(Player.model, Player.attachidx, Player.playtime);
 	}
-
-	// JUMPボタン Wキー
-	if (key & PAD_INPUT_8) {
-//		AnimationPlayer(JUMPIN);
-//		Player.playtime = 0.0f;
-//		Player.anim_totaltime = MV1GetAnimTotalTime(Player.model, Player.attachidx);
-		
-//		MV1SetAttachAnimTime(Player.model, Player.attachidx, Player.playtime);
-		cpos.y += 12.0f;
-	}
-
-	if (key & PAD_INPUT_5) {
-		cpos.y -= 12.0f;
-	}
-
+*/
 	if (CheckHitKey(KEY_INPUT_LSHIFT) == 1) {
 		Player.move.x *= 2.0f;
 		Player.move.z *= 2.0f;

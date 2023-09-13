@@ -110,6 +110,9 @@ VECTOR cadd;
 int FloorSearch();
 void E1_FloorSearch();
 
+// --- ƒJƒƒ‰‚ÌˆÚ“®
+void CameraMove();
+
 // --- •`‰æ
 void Draw();
 

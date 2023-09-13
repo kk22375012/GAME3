@@ -155,6 +155,9 @@ extern void Enemy1Init();
 extern int FloorSearch();
 extern void E1_FloorSearch();
 
+// --- ƒJƒƒ‰‚ÌˆÚ“®
+void CameraMove();
+
 // --- •`‰æ
 extern void Draw();
 
