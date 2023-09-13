@@ -151,9 +151,13 @@ extern void WeaponInit();
 // --- エネミー
 extern void Enemy1Init();
 
-// --- 床の当たり判定
+// --- モデルとの当たり判定
+extern void HitPolygonSearch();
 extern int FloorSearch();
 extern void E1_FloorSearch();
+
+// --- カメラの移動
+void CameraMove();
 
 // --- 描画
 extern void Draw();
