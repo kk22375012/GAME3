@@ -16,15 +16,9 @@ int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 		
 		
 	// カメラポジション cpos:カメラ位置　ctgt:カメラ注視点
-	if(CHOICESTAGE == 1){
-		cpos = VGet(0.0f,1400.0f,0.0f) ;
-		ctgt = VGet(0.0f,500.0f,-400.0f) ;
-		cadd = VGet(0.0f, 0.0f, 0.0f);
-	}
-	else{
-		cpos = VGet(500.0f,1501.0f,1800.0f) ;
-		ctgt = VGet(500.0f,800.0f,2800.0f) ; // 洞窟
-	}
+	cpos = VGet(0.0f,1400.0f,0.0f) ;
+	ctgt = VGet(0.0f,500.0f,-400.0f) ;
+	cadd = VGet(0.0f, 0.0f, 0.0f);
 
 	VECTOR Position ;
 
@@ -42,59 +36,39 @@ int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 	Enemy1Init();
 
 	// ステージ情報の読み込み
-	if(CHOICESTAGE == 1){
-		stagedata = MV1LoadModel("..\\Data\\Stage\\Stage00.mv1") ;
-		skydata = MV1LoadModel("..\\Data\\Stage\\Stage00_sky.mv1");
-		MV1SetUseZBuffer(skydata, false);
-		// ブロックモデルの読み込み
-		blockdate[TATAMI_BLOCK] = MV1LoadModel("..\\Data\\Stage\\畳.mv1");
-		// マップデータに反映
-		for (int y = 0; y < 10; y++) {
-			for (int x = 0; x < 10; x++) {
-				switch (StageMap[y][x]) {
-					case TATAMI_BLOCK :
-						StageMap[y][x] = MV1DuplicateModel(blockdate[TATAMI_BLOCK]);
-						break;
-				}
+	stagedata = MV1LoadModel("..\\Data\\Stage\\Stage00.mv1") ;
+	skydata = MV1LoadModel("..\\Data\\Stage\\Stage00_sky.mv1");
+	MV1SetUseZBuffer(skydata, false);
+	// ブロックモデルの読み込み
+	blockdate[TATAMI_BLOCK] = MV1LoadModel("..\\Data\\Stage\\畳.mv1");
+	// マップデータに反映
+	for (int y = 0; y < 10; y++) {
+		for (int x = 0; x < 10; x++) {
+			switch (StageMap[y][x]) {
+				case TATAMI_BLOCK :
+					StageMap[y][x] = MV1DuplicateModel(blockdate[TATAMI_BLOCK]);
+					break;
 			}
 		}
-
-
-
-		// シャドウマップハンドルの作成
-
-
-		// ライトの方向を設定
-		SetLightDirection( VGet( 0.5f, -0.5f, -0.5f ) );
-		ShadowMapHandle = MakeShadowMap( 1024, 1024 ) ;
-
-		// シャドウマップが想定するライトの方向もセット
-		SetShadowMapLightDirection( ShadowMapHandle, VGet( 0.5f, -0.5f, 0.5f ) ) ;
-
-		// シャドウマップに描画する範囲を設定
-		SetShadowMapDrawArea( ShadowMapHandle, VGet( -1000.0f, -10.0f, -1000.0f ), VGet( 1000.0f, 1000.0f, 1000.0f ) ) ;
-
-		stagedata_c = MV1LoadModel("..\\Data\\Stage\\Stage00_c.mv1") ;
-		if(stagedata == -1) return -1 ;
 	}
-	else{
-		stagedata = MV1LoadModel("..\\Data\\Stage\\Stage01.mv1") ;
-		// シャドウマップハンドルの作成
 
 
-		// ライトの方向を設定
-		SetLightDirection( VGet( -0.5f, -0.5f, 0.5f ) );
-		ShadowMapHandle = MakeShadowMap( 1024, 1024 ) ;
 
-		// シャドウマップが想定するライトの方向もセット
-		SetShadowMapLightDirection( ShadowMapHandle, VGet( 0.5f, -0.5f, 0.5f ) ) ;
+	// シャドウマップハンドルの作成
 
-		// シャドウマップに描画する範囲を設定
-		SetShadowMapDrawArea( ShadowMapHandle, VGet( -1000.0f, -1.0f, -1000.0f ), VGet( 1000.0f, 1000.0f, 1000.0f ) ) ;
 
-		stagedata_c = MV1LoadModel("..\\Data\\Stage\\Stage01_c.mv1") ;
-		if(stagedata == -1) return -1 ;	
-	}
+	// ライトの方向を設定
+	SetLightDirection( VGet( 0.5f, -0.5f, 0.5f ) );
+	ShadowMapHandle = MakeShadowMap( 1024, 1024 ) ;
+
+	// シャドウマップが想定するライトの方向もセット
+	SetShadowMapLightDirection( ShadowMapHandle, VGet( 0.5f, -0.5f, 0.5f ) ) ;
+
+	// シャドウマップに描画する範囲を設定
+	SetShadowMapDrawArea( ShadowMapHandle, VGet( -1000.0f, -10.0f, -1000.0f ), VGet( 1000.0f, 1000.0f, 1000.0f ) ) ;
+
+	stagedata_c = MV1LoadModel("..\\Data\\Stage\\Stage00_c.mv1") ;
+	if(stagedata == -1) return -1 ;
 	// モデル全体のコリジョン情報のセットアップ
 	MV1SetupCollInfo( stagedata, -1 ) ;
 
