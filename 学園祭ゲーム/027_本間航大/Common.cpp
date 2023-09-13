@@ -85,10 +85,10 @@ ConsoleWindow g_cWin;
 // --- アニメーション
 void AnimationInit();
 void AnimationPlayer(int);
-void AnimationEnemy1(int);
+void AnimationEnemy(int);
 
 // --- プレイヤー
-SCharaInfo Player;
+SCharaInfo Player[2];
 void PlayerInit();
 void PlayerMove();
 
@@ -98,8 +98,7 @@ int WeponAttachFrameNum;
 void WeaponInit();
 
 // --- エネミー
-SCharaInfo Enemy1;
-void Enemy1Init();
+void EnemyInit();
 
 // --- カメラ
 VECTOR cpos;

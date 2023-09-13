@@ -33,14 +33,14 @@ int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 	AnimationInit();
 	PlayerInit();
 	WeaponInit();
-	Enemy1Init();
+	EnemyInit();
 
 	// ステージ情報の読み込み
 	stagedata = MV1LoadModel("..\\Data\\Stage\\Stage00.mv1") ;
 	skydata = MV1LoadModel("..\\Data\\Stage\\Stage00_sky.mv1");
 	MV1SetUseZBuffer(skydata, false);
 	// ブロックモデルの読み込み
-	blockdate[TATAMI_BLOCK] = MV1LoadModel("..\\Data\\Stage\\畳.mv1");
+	blockdate[TATAMI_BLOCK] = MV1LoadModel("..\\Data\\Stage\\たたみ.mv1");
 	// マップデータに反映
 	for (int y = 0; y < 10; y++) {
 		for (int x = 0; x < 10; x++) {
@@ -58,14 +58,14 @@ int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 
 
 	// ライトの方向を設定
-	SetLightDirection( VGet( 0.5f, -0.5f, 0.5f ) );
+	SetLightDirection( VGet( 0.5f, -0.5f, -0.5f ) );
 	ShadowMapHandle = MakeShadowMap( 1024, 1024 ) ;
 
 	// シャドウマップが想定するライトの方向もセット
-	SetShadowMapLightDirection( ShadowMapHandle, VGet( 0.5f, -0.5f, 0.5f ) ) ;
+	SetShadowMapLightDirection( ShadowMapHandle, VGet( 0.5f, -0.5f, -0.5f ) ) ;
 
 	// シャドウマップに描画する範囲を設定
-	SetShadowMapDrawArea( ShadowMapHandle, VGet( -1000.0f, -10.0f, -1000.0f ), VGet( 1000.0f, 1000.0f, 1000.0f ) ) ;
+	SetShadowMapDrawArea( ShadowMapHandle, VGet( -5000.0f, -10.0f, -5000.0f ), VGet( 5000.0f, 1000.0f, 5000.0f ) ) ;
 
 	stagedata_c = MV1LoadModel("..\\Data\\Stage\\Stage00_c.mv1") ;
 	if(stagedata == -1) return -1 ;
@@ -117,107 +117,107 @@ int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 				ctgt = VGet(0.0f, 500.0f, 0.0f);
 				cadd = VGet(0.0f, 0.0f, 0.0f);
 
-				Player.pos = VGet(200.0f, 200.0f, 0.0f);
-				Enemy1.pos = VGet(600.0f, 300.0f, 200.0f);
+				Player[0].pos = VGet(200.0f, 200.0f, 0.0f);
+				Player[1].pos = VGet(600.0f, 300.0f, 200.0f);
 
 				// モデルの移動(配置)
-				MV1SetRotationXYZ(Player.model, VGet(0.0f, 1.57f * Player.direction, 0.0f));
-				MV1SetPosition(Player.model, Player.pos);
-				MV1SetRotationXYZ(Enemy1.model, VGet(0.0f, 1.57f * Enemy1.direction, 0.0f));
-				MV1SetPosition(Enemy1.model, Enemy1.pos);
+				MV1SetRotationXYZ(Player[0].model, VGet(0.0f, 1.57f * Player[0].direction, 0.0f));
+				MV1SetPosition(Player[0].model, Player[0].pos);
+				MV1SetRotationXYZ(Player[1].model, VGet(0.0f, 1.57f * Player[1].direction, 0.0f));
+				MV1SetPosition(Player[1].model, Player[1].pos);
 
 				Draw();
 				ScreenFlip();
 
 				if (CheckHitKey(KEY_INPUT_RETURN) == 1) {
-					Player.pos = VGet(200.0f, 200.0f, -1000.0f);
+					Player[0].pos = VGet(200.0f, 200.0f, -1000.0f);
 					gamemode = eScenePlay;
 				}
 				break;
 
 			case eScenePlay :
 				// アニメーション進行
-				if(Player.mode != JUMPOUT){
-					Player.playtime += 0.5f ;
+				if(Player[0].mode != JUMPOUT){
+					Player[0].playtime += 0.5f ;
 				}
 				else{
-					Player.playtime += 1.0f ;		
+					Player[0].playtime += 1.0f ;		
 				}
 
-				Enemy1.playtime += 0.5f;
-				if (Enemy1.mode == E_BLOWIN) {
-					Enemy1.playtime += 2.0f;
+				Player[1].playtime += 0.5f;
+				if (Player[1].mode == E_BLOWIN) {
+					Player[1].playtime += 2.0f;
 				}
 
 				//　エネミーのモーション終了時の処理
-				if (Enemy1.playtime > Enemy1.anim_totaltime) {
-					switch (Enemy1.mode) {
+				if (Player[1].playtime > Player[1].anim_totaltime) {
+					switch (Player[1].mode) {
 						case E_STAND :
-							Enemy1.playtime = 0.0f;
+							Player[1].playtime = 0.0f;
 							break;
 
 						case E_BLOWIN :
-							AnimationEnemy1(E_BLOWLOOP);
-							Enemy1.playtime = 0.0f;
-							Enemy1.move.x = 0.0f;
-							Enemy1.move.y = 0.0f;
-							Enemy1.move.z = 0.0f;
+							AnimationEnemy(E_BLOWLOOP);
+							Player[1].playtime = 0.0f;
+							Player[1].move.x = 0.0f;
+							Player[1].move.y = 0.0f;
+							Player[1].move.z = 0.0f;
 							break;
 
 						case E_BLOWLOOP :
-							AnimationEnemy1(E_BLOWOUT);
-							Enemy1.playtime = 0.0f;
-							Enemy1.anim_totaltime = MV1GetAnimTotalTime(Enemy1.model, Enemy1.attachidx);
-							MV1SetAttachAnimTime(Enemy1.model, Enemy1.attachidx, Enemy1.playtime);
+							AnimationEnemy(E_BLOWOUT);
+							Player[1].playtime = 0.0f;
+							Player[1].anim_totaltime = MV1GetAnimTotalTime(Player[1].model, Player[1].attachidx);
+							MV1SetAttachAnimTime(Player[1].model, Player[1].attachidx, Player[1].playtime);
 							break;
 
 						case E_BLOWOUT :
-							AnimationEnemy1(E_STAND);
-							Enemy1.playtime = 0.0f;
+							AnimationEnemy(E_STAND);
+							Player[1].playtime = 0.0f;
 							break;
 					}
 				}
 
 				//　プレイヤーのモーション終了時の処理
-				if (Player.mode != FALL){
-					if (Player.playtime > Player.anim_totaltime){
-						if (Player.mode == JUMPIN) {
+				if (Player[0].mode != FALL){
+					if (Player[0].playtime > Player[0].anim_totaltime){
+						if (Player[0].mode == JUMPIN) {
 							AnimationPlayer(JUMPLOOP);
-							Player.move.y = 15.0f;
-							Player.pos.y += (Player.move.y * 4);	// ジャンプ直後の地面めり込みを避けるため
+							Player[0].move.y = 15.0f;
+							Player[0].pos.y += (Player[0].move.y * 4);	// ジャンプ直後の地面めり込みを避けるため
 						}
 
-						if (Player.mode == JUMPOUT)	AnimationPlayer(STAND);
+						if (Player[0].mode == JUMPOUT)	AnimationPlayer(STAND);
 
-						if (Player.mode == ATTACK) AnimationPlayer(STAND);
+						if (Player[0].mode == ATTACK) AnimationPlayer(STAND);
 
-						Player.playtime = 0.0f ;
+						Player[0].playtime = 0.0f ;
 					}
 				}
 
 				// プレイヤーの攻撃モーション中の移動量変化の処理
-				if (Player.mode == ATTACK) {
-					if (Player.playtime > 8.0f) {
-						Player.move.x = 0;
-						Player.move.y = 0;
-						Player.move.z = 0;
+				if (Player[0].mode == ATTACK) {
+					if (Player[0].playtime > 8.0f) {
+						Player[0].move.x = 0;
+						Player[0].move.y = 0;
+						Player[0].move.z = 0;
 					}
 				}
 
 				// アニメーションの反映
-				MV1SetAttachAnimTime(Player.model, Player.attachidx, Player.playtime);
-				MV1SetAttachAnimTime(Enemy1.model, Enemy1.attachidx, Enemy1.playtime);
+				MV1SetAttachAnimTime(Player[0].model, Player[0].attachidx, Player[0].playtime);
+				MV1SetAttachAnimTime(Player[1].model, Player[1].attachidx, Player[1].playtime);
 				// キー操作
-				if(Player.mode == STAND || Player.mode == RUN){
+				if(Player[0].mode == STAND || Player[0].mode == RUN){
 					PlayerMove();
 
 					// アニメのループ管理(ジャンプループと落ちるものはループしない)
-					if ( Player.mode != JUMPLOOP && Player.mode != FALL ) {
-						if (Player.playtime > Player.anim_totaltime) {
-							if ( Player.mode == JUMPIN ) {
+					if ( Player[0].mode != JUMPLOOP && Player[0].mode != FALL ) {
+						if (Player[0].playtime > Player[0].anim_totaltime) {
+							if ( Player[0].mode == JUMPIN ) {
 								AnimationPlayer(JUMPLOOP);
-								Player.move.y = 15.0f;
-								Player.pos.y += (Player.move.y * 4);	// ジャンプ直後の地面めり込みを避けるため
+								Player[0].move.y = 15.0f;
+								Player[0].pos.y += (Player[0].move.y * 4);	// ジャンプ直後の地面めり込みを避けるため
 							}
 						}
 					}
@@ -225,15 +225,15 @@ int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 
 				// 走っているか立っているかの区別
 				if(key == 0){
-					if(Player.mode == RUN) {
+					if(Player[0].mode == RUN) {
 						AnimationPlayer(STAND);
-						Player.move.x = 0.0f;
-						Player.move.y = 0.0f;
-						Player.move.z = 0.0f;
+						Player[0].move.x = 0.0f;
+						Player[0].move.y = 0.0f;
+						Player[0].move.z = 0.0f;
 					}
 				}
 				else{
-					if(Player.mode == STAND){
+					if(Player[0].mode == STAND){
 						AnimationPlayer(RUN);
 					}
 				}
@@ -242,65 +242,65 @@ int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 				DrawBox(0,0,900,600,GetColor(255,255,255),true) ; //最後の引数をfalseにすると塗りつぶし無し
 
 				// キャラとヒットチェック
-				if(HitCheck_Capsule_Capsule(VAdd(Player.pos,Player.move),VAdd(Player.pos,Player.move),Player.charahitinfo.Width / 2,
-											VAdd(Enemy1.pos,Enemy1.move),VAdd(Enemy1.pos,Enemy1.move),Enemy1.charahitinfo.Width / 2) == TRUE){
+				if(HitCheck_Capsule_Capsule(VAdd(Player[0].pos,Player[0].move),VAdd(Player[0].pos,Player[0].move),Player[0].charahitinfo.Width / 2,
+											VAdd(Player[1].pos,Player[1].move),VAdd(Player[1].pos,Player[1].move),Player[1].charahitinfo.Width / 2) == TRUE){
 					// 移動量を無しに
-					Player.move.x = 0.0f ;
-					Player.move.y = 0.0f ;
-					Player.move.z = 0.0f ;
+					Player[0].move.x = 0.0f ;
+					Player[0].move.y = 0.0f ;
+					Player[0].move.z = 0.0f ;
 				}
 
 				// 攻撃時のエネミーのヒットチェック
-				if (Player.mode == ATTACK) {
-					if (Enemy1.mode == E_STAND) {
-						if (HitCheck_Capsule_Capsule(VAdd(VGet(Player.pos.x - 80.0f, Player.pos.y, Player.pos.z - 80.0f), Player.move),
-														VAdd(VGet(Player.pos.x + 80.0f, Player.pos.y, Player.pos.z + 80.0f), Player.move), Player.charahitinfo.Width / 2,
-															VAdd(Enemy1.pos, Enemy1.move), VAdd(Enemy1.pos, Enemy1.move), Enemy1.charahitinfo.Width / 2) == TRUE) {
-							AnimationEnemy1(E_BLOWIN);
-							Enemy1.playtime = 0.0f;
+				if (Player[0].mode == ATTACK) {
+					if (Player[1].mode == E_STAND) {
+						if (HitCheck_Capsule_Capsule(VAdd(VGet(Player[0].pos.x - 80.0f, Player[0].pos.y, Player[0].pos.z - 80.0f), Player[0].move),
+														VAdd(VGet(Player[0].pos.x + 80.0f, Player[0].pos.y, Player[0].pos.z + 80.0f), Player[0].move), Player[0].charahitinfo.Width / 2,
+															VAdd(Player[1].pos, Player[1].move), VAdd(Player[1].pos, Player[1].move), Player[1].charahitinfo.Width / 2) == TRUE) {
+							AnimationEnemy(E_BLOWIN);
+							Player[1].playtime = 0.0f;
 							// エネミーのノックバック
-							if (Player.direction == DOWN) {
-								Enemy1.move.z -= ENEMY_KNOCKBACK;
-								Enemy1.direction = UP;
+							if (Player[0].direction == DOWN) {
+								Player[1].move.z -= ENEMY_KNOCKBACK;
+								Player[1].direction = UP;
 							}
-							if (Player.direction == 0.5f) {
-								Enemy1.move.x -= ENEMY_KNOCKBACK / 2;
-								Enemy1.move.z -= ENEMY_KNOCKBACK / 2;
-								Enemy1.direction = 2.5f;
+							if (Player[0].direction == 0.5f) {
+								Player[1].move.x -= ENEMY_KNOCKBACK / 2;
+								Player[1].move.z -= ENEMY_KNOCKBACK / 2;
+								Player[1].direction = 2.5f;
 							}
-							if (Player.direction == LEFT) {
-								Enemy1.move.x -= ENEMY_KNOCKBACK;
-								Enemy1.direction = RIGHT;
+							if (Player[0].direction == LEFT) {
+								Player[1].move.x -= ENEMY_KNOCKBACK;
+								Player[1].direction = RIGHT;
 							}
-							if (Player.direction == 1.5f) {
-								Enemy1.move.x -= ENEMY_KNOCKBACK / 2;
-								Enemy1.move.z += ENEMY_KNOCKBACK / 2;
-								Enemy1.direction = 3.5f;
+							if (Player[0].direction == 1.5f) {
+								Player[1].move.x -= ENEMY_KNOCKBACK / 2;
+								Player[1].move.z += ENEMY_KNOCKBACK / 2;
+								Player[1].direction = 3.5f;
 							}
-							if (Player.direction == UP) {
-								Enemy1.move.z += ENEMY_KNOCKBACK;
-								Enemy1.direction = DOWN;
+							if (Player[0].direction == UP) {
+								Player[1].move.z += ENEMY_KNOCKBACK;
+								Player[1].direction = DOWN;
 							}
-							if (Player.direction == 2.5f) {
-								Enemy1.move.x += ENEMY_KNOCKBACK / 2;
-								Enemy1.move.z += ENEMY_KNOCKBACK / 2;
-								Enemy1.direction = 0.5f;
+							if (Player[0].direction == 2.5f) {
+								Player[1].move.x += ENEMY_KNOCKBACK / 2;
+								Player[1].move.z += ENEMY_KNOCKBACK / 2;
+								Player[1].direction = 0.5f;
 							}
-							if (Player.direction == RIGHT) {
-								Enemy1.move.x += ENEMY_KNOCKBACK;
-								Enemy1.direction = LEFT;
+							if (Player[0].direction == RIGHT) {
+								Player[1].move.x += ENEMY_KNOCKBACK;
+								Player[1].direction = LEFT;
 							}
-							if (Player.direction == 3.5f) {
-								Enemy1.move.x += ENEMY_KNOCKBACK / 2;
-								Enemy1.move.z += ENEMY_KNOCKBACK / 2;
-								Enemy1.direction = 1.5f;
+							if (Player[0].direction == 3.5f) {
+								Player[1].move.x += ENEMY_KNOCKBACK / 2;
+								Player[1].move.z += ENEMY_KNOCKBACK / 2;
+								Player[1].direction = 1.5f;
 							}
 						}
 					}
 				}
 
 
-				HitDim = MV1CollCheck_Sphere( stagedata, -1, Player.pos, CHARA_ENUM_DEFAULT_SIZE + VSize( Player.move ) ) ;
+				HitDim = MV1CollCheck_Sphere( stagedata, -1, Player[0].pos, CHARA_ENUM_DEFAULT_SIZE + VSize( Player[0].move ) ) ;
 				WallNum = 0 ;
 				FloorNum = 0 ;
 				// 検出されたポリゴンの数だけ繰り返し
@@ -309,9 +309,9 @@ int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 					if( HitDim.Dim[i].Normal.y < 0.000001f && HitDim.Dim[i].Normal.y > -0.000001f ){
 						printf("壁扱い\n") ;
 						// 壁ポリゴンと判断された場合でも、キャラクターのＹ座標＋１．０ｆより高いポリゴンのみ当たり判定を行う
-						if( HitDim.Dim[i].Position[0].y > Player.pos.y + 1.0f ||
-							HitDim.Dim[i].Position[1].y > Player.pos.y + 1.0f ||
-							HitDim.Dim[i].Position[2].y > Player.pos.y + 1.0f ){
+						if( HitDim.Dim[i].Position[0].y > Player[0].pos.y + 1.0f ||
+							HitDim.Dim[i].Position[1].y > Player[0].pos.y + 1.0f ||
+							HitDim.Dim[i].Position[2].y > Player[0].pos.y + 1.0f ){
 							// ポリゴンの数が列挙できる限界数に達していなかったらポリゴンを配列に追加
 							if( WallNum < CHARA_MAX_HITCOLL ){
 								// ポリゴンの構造体のアドレスを壁ポリゴンポインタ配列に保存する
@@ -341,52 +341,52 @@ int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 				// 床ポリゴンに当たったかどうかで処理を分岐
 				if( HitFlag == 1 ){
 					// 接触したポリゴンで一番高いＹ座標をキャラクターのＹ座標にする
-					Player.pos.y = MaxY ;
-					Player.move.y = 0.0f ;
+					Player[0].pos.y = MaxY ;
+					Player[0].move.y = 0.0f ;
 
-					if(Player.mode == FALL){
+					if(Player[0].mode == FALL){
 						AnimationPlayer(JUMPOUT);
-						Player.playtime = 0.0f ;
-						Player.move.x = 0.0f ;
-						Player.move.y = 0.0f ;
-						Player.move.z = 0.0f ;
+						Player[0].playtime = 0.0f ;
+						Player[0].move.x = 0.0f ;
+						Player[0].move.y = 0.0f ;
+						Player[0].move.z = 0.0f ;
 					}
 				}
 				else{
 					// 宙に浮いた状態
-					if(Player.mode != FALL){ // ジャンプ状態じゃない
-						MV1DetachAnim(Player.model,Player.attachidx) ;
-						Player.mode = FALL ;
-						Player.attachidx = MV1AttachAnim(Player.model,0, plyanim_jumploop) ;
-						Player.anim_totaltime = MV1GetAttachAnimTotalTime(Player.model,Player.attachidx) ;
-						Player.playtime = 7.0f ;
-						MV1SetAttachAnimTime(Player.model,Player.attachidx,Player.playtime) ;
+					if(Player[0].mode != FALL){ // ジャンプ状態じゃない
+						MV1DetachAnim(Player[0].model,Player[0].attachidx) ;
+						Player[0].mode = FALL ;
+						Player[0].attachidx = MV1AttachAnim(Player[0].model,0, plyanim_jumploop) ;
+						Player[0].anim_totaltime = MV1GetAttachAnimTotalTime(Player[0].model,Player[0].attachidx) ;
+						Player[0].playtime = 7.0f ;
+						MV1SetAttachAnimTime(Player[0].model,Player[0].attachidx,Player[0].playtime) ;
 					}
 				}
 				// ジャンプ中だったら重力追加させる
-				if (Player.mode == FALL) {
-					Player.move.y -= 0.5f;
+				if (Player[0].mode == FALL) {
+					Player[0].move.y -= 0.5f;
 				}
 
 				E1_FloorSearch();
 				// 床ポリゴンに当たったかどうかで処理を分岐
 				if (E1_HitFlag == 1) {
 					// 接触したポリゴンで一番高いＹ座標をキャラクターのＹ座標にする
-					Enemy1.pos.y = E1_MaxY;
-					Enemy1.move.y = 0.0f;
+					Player[1].pos.y = E1_MaxY;
+					Player[1].move.y = 0.0f;
 				}
 
 				// 検出したキャラクターの周囲のポリゴン情報を開放する
 				MV1CollResultPolyDimTerminate( HitDim ) ;
 
 				// 移動処理
-				Player.pos.x += Player.move.x ;
-				Player.pos.y += Player.move.y ;
-				Player.pos.z += Player.move.z ;
+				Player[0].pos.x += Player[0].move.x ;
+				Player[0].pos.y += Player[0].move.y ;
+				Player[0].pos.z += Player[0].move.z ;
 
-				Enemy1.pos.x += Enemy1.move.x;
-				Enemy1.pos.y += Enemy1.move.y;
-				Enemy1.pos.z += Enemy1.move.z;
+				Player[1].pos.x += Player[1].move.x;
+				Player[1].pos.y += Player[1].move.y;
+				Player[1].pos.z += Player[1].move.z;
 
 				// カメラの視点操作
 				CameraMove();
@@ -397,23 +397,23 @@ int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 				skypos.z = cpos.z;
 
 				// エネミーの向きの限定
-				if (Enemy1.direction < 0.0f) Enemy1.direction += 4.0f;
-				if (Enemy1.direction > 4.0f) Enemy1.direction -= 4.0f;
+				if (Player[1].direction < 0.0f) Player[1].direction += 4.0f;
+				if (Player[1].direction > 4.0f) Player[1].direction -= 4.0f;
 
 				SetCameraPositionAndTargetAndUpVec(cpos,ctgt,VGet(0.0f,1.0f,0.0f)) ;
 
 				// モデルの回転
-				MV1SetRotationXYZ(Player.model,VGet(0.0f,1.57f * Player.direction,0.0f)) ;
+				MV1SetRotationXYZ(Player[0].model,VGet(0.0f,1.57f * Player[0].direction,0.0f)) ;
 				// モデルの移動(配置)
-				MV1SetPosition(Player.model,Player.pos);
+				MV1SetPosition(Player[0].model,Player[0].pos);
 
 				// モデルの回転
-				MV1SetRotationXYZ(Enemy1.model, VGet(0.0f, 1.57f * Enemy1.direction, 0.0f));
+				MV1SetRotationXYZ(Player[1].model, VGet(0.0f, 1.57f * Player[1].direction, 0.0f));
 				// モデルの移動(配置)
-				MV1SetPosition(Enemy1.model,Enemy1.pos);
+				MV1SetPosition(Player[1].model,Player[1].pos);
 
 				// 武器を使うモデルにアタッチする(アタッチさせるモデルの回転や移動の後に行う)
-				WeaponMatrix = MV1GetFrameLocalWorldMatrix(Player.model, WeponAttachFrameNum);	// アタッチさせるモデルとそのフレームを貰いそのローカル座標をワールド座標に変換するマトリックスを返す関数
+				WeaponMatrix = MV1GetFrameLocalWorldMatrix(Player[0].model, WeponAttachFrameNum);	// アタッチさせるモデルとそのフレームを貰いそのローカル座標をワールド座標に変換するマトリックスを返す関数
 				MV1SetMatrix(PlayerSabel.model, WeaponMatrix);									// アタッチするモデルとマトリックスを貰い座標に直す関数
 
 				// 地面(配置)
@@ -444,8 +444,8 @@ int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 	// ステージモデルの削除
 	MV1DeleteModel(stagedata);
 	// キャラクターモデルの削除
-	MV1DeleteModel(Player.model);
-	MV1DeleteModel(Enemy1.model);
+	MV1DeleteModel(Player[0].model);
+	MV1DeleteModel(Player[1].model);
 
 	DxLib_End();
 	return 0 ;

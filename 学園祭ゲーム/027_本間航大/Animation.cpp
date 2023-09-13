@@ -26,79 +26,79 @@ void AnimationInit() {
 //						プレイヤーのアニメーション							//
 // ------------------------------------------------------------------------ //
 void AnimationPlayer( int Animation ) {
-	MV1DetachAnim(Player.model, Player.attachidx);
+	MV1DetachAnim(Player[0].model, Player[0].attachidx);
 	switch (Animation) {
 		// 立ち状態の処理
 		case STAND:
-			Player.attachidx = MV1AttachAnim(Player.model, 0, plyanim_nutral);
-			Player.mode = STAND;
+			Player[0].attachidx = MV1AttachAnim(Player[0].model, 0, plyanim_nutral);
+			Player[0].mode = STAND;
 			break;
 
 		//走り状態の処理
 		case RUN:
-			Player.attachidx = MV1AttachAnim(Player.model, 0, plyanim_run);
-			Player.mode = RUN;
+			Player[0].attachidx = MV1AttachAnim(Player[0].model, 0, plyanim_run);
+			Player[0].mode = RUN;
 			break;
 
 		// ジャンプ開始時の処理
 		case JUMPIN :
-			Player.attachidx = MV1AttachAnim(Player.model, 0, plyanim_jumpin);
-			Player.mode = JUMPIN;
+			Player[0].attachidx = MV1AttachAnim(Player[0].model, 0, plyanim_jumpin);
+			Player[0].mode = JUMPIN;
 			break;
 
 		// ジャンプ中の処理
 		case JUMPLOOP :
-			Player.attachidx = MV1AttachAnim(Player.model, 0, plyanim_jumploop);
-			Player.mode = JUMPLOOP;
+			Player[0].attachidx = MV1AttachAnim(Player[0].model, 0, plyanim_jumploop);
+			Player[0].mode = JUMPLOOP;
 			break;
 
 		// ジャンプ終了時の処理
 		case JUMPOUT :
-			Player.attachidx = MV1AttachAnim(Player.model, 0, plyanim_jumpout);
-			Player.mode = JUMPOUT;
+			Player[0].attachidx = MV1AttachAnim(Player[0].model, 0, plyanim_jumpout);
+			Player[0].mode = JUMPOUT;
 			break;
 
 		// 攻撃時の処理
 		case ATTACK :
-			Player.attachidx = MV1AttachAnim(Player.model, 0, plyanim_attack);
-			Player.mode = ATTACK;
+			Player[0].attachidx = MV1AttachAnim(Player[0].model, 0, plyanim_attack);
+			Player[0].mode = ATTACK;
 			break;
 	}
-	Player.anim_totaltime = MV1GetAttachAnimTotalTime(Player.model, Player.attachidx);
+	Player[0].anim_totaltime = MV1GetAttachAnimTotalTime(Player[0].model, Player[0].attachidx);
 }
 
 // ------------------------------------------------------------------------ //
 //						エネミーのアニメーション							//
 // ------------------------------------------------------------------------ //
-void AnimationEnemy1(int Animation) {
-	MV1DetachAnim(Enemy1.model, Enemy1.attachidx);
+void AnimationEnemy(int Animation) {
+	MV1DetachAnim(Player[1].model, Player[1].attachidx);
 	switch (Animation) {
 		// 立ち状態の処理
 		case E_STAND:
-			Enemy1.attachidx = MV1AttachAnim(Enemy1.model, 0, gobanim_ntural);
-			Enemy1.mode = E_STAND;
+			Player[1].attachidx = MV1AttachAnim(Player[1].model, 0, gobanim_ntural);
+			Player[1].mode = E_STAND;
 			break;
 
 		// ダメージを負う開始時の処理
 		case E_BLOWIN :
-			Enemy1.attachidx = MV1AttachAnim(Enemy1.model, 0, gobanim_blowin);
-			Enemy1.mode = E_BLOWIN;
+			Player[1].attachidx = MV1AttachAnim(Player[1].model, 0, gobanim_blowin);
+			Player[1].mode = E_BLOWIN;
 			break;
 
 
 		// ダメージ中の処理
 		case E_BLOWLOOP :
-			Enemy1.attachidx = MV1AttachAnim(Enemy1.model, 0, gobanim_blowloop);
-			Enemy1.mode = E_BLOWLOOP;
+			Player[1].attachidx = MV1AttachAnim(Player[1].model, 0, gobanim_blowloop);
+			Player[1].mode = E_BLOWLOOP;
 			break;
 
 		// ダメージ終了時の処理
 		case E_BLOWOUT :
-			Enemy1.attachidx = MV1AttachAnim(Enemy1.model, 0, gobanim_blowout);
-			Enemy1.mode = E_BLOWOUT;
+			Player[1].attachidx = MV1AttachAnim(Player[1].model, 0, gobanim_blowout);
+			Player[1].mode = E_BLOWOUT;
 			break;
 	}
-	Enemy1.anim_totaltime = MV1GetAttachAnimTotalTime(Player.model, Player.attachidx);
+	Player[1].anim_totaltime = MV1GetAttachAnimTotalTime(Player[0].model, Player[0].attachidx);
 
 }
 

@@ -17,10 +17,10 @@ int FloorSearch() {
 		// i番目の床ポリゴンのアドレスを床ポリゴンポインタ配列から取得
 		Poly = Floor[i];
 
-		VECTOR cal_pos1 = VAdd(Player.pos, VGet(0.0f, PC_HEIGHT, 0.0f));
-		VECTOR cal_pos2 = VAdd(Player.pos, VGet(0.0f, -25.0f, 0.0f));
-		if (Player.mode == JUMPIN || Player.mode == JUMPLOOP) {
-			cal_pos2 = VAdd(Player.pos, VGet(0.0f, 5.0f, 0.0f));
+		VECTOR cal_pos1 = VAdd(Player[0].pos, VGet(0.0f, PC_HEIGHT, 0.0f));
+		VECTOR cal_pos2 = VAdd(Player[0].pos, VGet(0.0f, -25.0f, 0.0f));
+		if (Player[0].mode == JUMPIN || Player[0].mode == JUMPLOOP) {
+			cal_pos2 = VAdd(Player[0].pos, VGet(0.0f, 5.0f, 0.0f));
 		}
 		// 走っている場合は頭の先からそこそこ低い位置の間で当たっているかを判定( 傾斜で落下状態に移行してしまわない為 )
 		LineRes = HitCheck_Line_Triangle(cal_pos1, cal_pos2, Poly->Position[0], Poly->Position[1], Poly->Position[2]);
@@ -68,10 +68,10 @@ void E1_FloorSearch() {
 		// i番目の床ポリゴンのアドレスを床ポリゴンポインタ配列から取得
 		Poly = Floor[i];
 
-		VECTOR cal_pos1 = VAdd(Enemy1.pos, VGet(0.0f, PC_HEIGHT, 0.0f));
-		VECTOR cal_pos2 = VAdd(Enemy1.pos, VGet(0.0f, -25.0f, 0.0f));
-		if (Enemy1.mode == JUMPIN || Enemy1.mode == JUMPLOOP) {
-			cal_pos2 = VAdd(Enemy1.pos, VGet(0.0f, 5.0f, 0.0f));
+		VECTOR cal_pos1 = VAdd(Player[1].pos, VGet(0.0f, PC_HEIGHT, 0.0f));
+		VECTOR cal_pos2 = VAdd(Player[1].pos, VGet(0.0f, -25.0f, 0.0f));
+		if (Player[1].mode == JUMPIN || Player[1].mode == JUMPLOOP) {
+			cal_pos2 = VAdd(Player[1].pos, VGet(0.0f, 5.0f, 0.0f));
 		}
 		// 走っている場合は頭の先からそこそこ低い位置の間で当たっているかを判定( 傾斜で落下状態に移行してしまわない為 )
 		E1_LineRes = HitCheck_Line_Triangle(cal_pos1, cal_pos2, Poly->Position[0], Poly->Position[1], Poly->Position[2]);
