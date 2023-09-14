@@ -15,7 +15,7 @@ void PlayerInit() {
 		Player[0].pos = VGet(500.0f, 800.0f, 2800.0f); // “´ŒA
 	}
 	Player[0].mode = STAND;
-	Player[0].direction = DOWN;
+	Player[0].direction = UP;
 	Player[0].charahitinfo.Height = PC_HEIGHT;
 	Player[0].charahitinfo.Width = PC_WIDTH;
 	Player[0].charahitinfo.CenterPosition = Player[0].pos;
