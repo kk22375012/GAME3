@@ -330,14 +330,14 @@ int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 
 				MV1SetupCollInfo(StageMap[9][1], -1);
 
-<<<<<<< HEAD
+
 				// モデルと接触したポリゴンの検出
 				HitPolygonSearch();
 
 				HitDim = MV1CollCheck_Sphere( stagedata, -1, Player[0].pos, CHARA_ENUM_DEFAULT_SIZE + VSize( Player[0].move ) ) ;
-=======
+
 				HitDim = MV1CollCheck_Sphere(StageMap[9][1], -1, Player[0].pos, CHARA_ENUM_DEFAULT_SIZE + VSize( Player[0].move ) ) ;
->>>>>>> 41ef0f0ec99aa17962e74ba5344cf793327da0a5
+
 				WallNum = 0 ;
 				FloorNum = 0 ;
 				// 検出されたポリゴンの数だけ繰り返し

@@ -79,13 +79,13 @@ void PlayerMove() {
 		Player[0].move.z = +12.0f;
 		Player[0].direction = UP;
 
-<<<<<<< HEAD
+
 
 		// ¶‚ð‰Ÿ‰º ¶‚ÉˆÚ“®
 		if (key & PAD_INPUT_LEFT) {
 
 			Player[0].move.x = +12.0f;
-=======
+
 	// ¶‚ð‰Ÿ‰º ¶‚ÉˆÚ“®
 	if (key & PAD_INPUT_LEFT) {
 		Player[0].move.x = -12.0f;
@@ -169,7 +169,7 @@ void PlayerMove() {
 	}
 	if (Player[0].pos.z < -6640.0f) {
 		if (Player[0].move.z < 0)
->>>>>>> 41ef0f0ec99aa17962e74ba5344cf793327da0a5
+
 			Player[0].move.z = 0.0f;
 			if (key & PAD_INPUT_7) {
 				Player[0].move.x = 36.0f;
