@@ -28,12 +28,9 @@ void Draw() {
 		}
 	}
 
+
 	DrawTriangle3D(PolyCharaHitField[0], PolyCharaHitField[1], PolyCharaHitField[2],
 		GetColor(255, 0, 0), TRUE);
-
-
-//	DrawTriangle3D(PolyCharaHitField[0], PolyCharaHitField[1], PolyCharaHitField[2],
-//		GetColor(255, 0, 0), TRUE);
 
 	// ƒ‚ƒfƒ‹‚Ì•`‰æ
 	MV1DrawModel(Player[0].model);
