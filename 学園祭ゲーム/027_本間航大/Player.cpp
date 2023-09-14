@@ -35,7 +35,7 @@ void PlayerInit() {
 	// ---------------------------- // 
 	//		キャラモデルセット		//
 	// ---------------------------^ // 
-	Player[0].model = MV1LoadModel("..\\Data\\Ninja\\忍者.mv1");
+	Player[0].model = MV1LoadModel("..\\Data\\Ninja\\忍者_sub.mv1");
 	Player[0].attachidx = MV1AttachAnim(Player[0].model, 0, plyanim_nutral);
 	Player[0].anim_totaltime = MV1GetAttachAnimTotalTime(Player[0].model, Player[0].attachidx);
 	// アニメーションして動いてもその場で動いてるような状態
