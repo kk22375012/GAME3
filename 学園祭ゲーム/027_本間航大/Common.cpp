@@ -45,7 +45,7 @@ MV1_COLL_RESULT_POLY* Wall[CHARA_MAX_HITCOLL];		// •Çƒ|ƒŠƒSƒ“‚Æ”»’f‚³‚ê‚½ƒ|ƒŠƒSƒ
 MV1_COLL_RESULT_POLY* Floor[CHARA_MAX_HITCOLL];	// °ƒ|ƒŠƒSƒ“‚Æ”»’f‚³‚ê‚½ƒ|ƒŠƒSƒ“‚Ì\‘¢‘Ì‚ÌƒAƒhƒŒƒX‚ð•Û‘¶‚µ‚Ä‚¨‚­‚½‚ß‚Ìƒ|ƒCƒ“ƒ^”z—ñ
 
 // “–‚½‚è”»’è
-int HitFlag = FALSE;							// ƒ|ƒŠƒSƒ“‚É“–‚½‚Á‚½‚©‚Ç‚¤‚©‚ð‹L‰¯‚µ‚Ä‚¨‚­‚Ì‚ÉŽg‚¤•Ï”( 0 s:“–‚½‚Á‚Ä‚¢‚È‚¢  ‚P:“–‚½‚Á‚½ )
+int HitFlag = FALSE;							// ƒ|ƒŠƒSƒ“‚É“–‚½‚Á‚½‚©‚Ç‚¤‚©‚ð‹L‰¯‚µ‚Ä‚¨‚­‚Ì‚ÉŽg‚¤•Ï”( ‚O:“–‚½‚Á‚Ä‚¢‚È‚¢  ‚P:“–‚½‚Á‚½ )
 int E1_HitFlag = FALSE;								
 MV1_COLL_RESULT_POLY* Poly;						// ƒ|ƒŠƒSƒ“‚Ì\‘¢‘Ì‚ÉƒAƒNƒZƒX‚·‚é‚½‚ß‚ÉŽg—p‚·‚éƒ|ƒCƒ“ƒ^( Žg‚í‚È‚­‚Ä‚àÏ‚Ü‚¹‚ç‚ê‚Ü‚·‚ªƒvƒƒOƒ‰ƒ€‚ª’·‚­‚È‚é‚Ì‚ÅEEE )
 HITRESULT_LINE LineRes;							// ü•ª‚Æƒ|ƒŠƒSƒ“‚Æ‚Ì“–‚½‚è”»’è‚ÌŒ‹‰Ê‚ð‘ã“ü‚·‚é\‘¢‘Ì
