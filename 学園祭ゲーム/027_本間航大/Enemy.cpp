@@ -20,7 +20,7 @@ void EnemyInit() {
 	// --------------------------- // 
 	//		キャラモデルセット	   //
 	// --------------------------- //
-	Player[1].model = MV1LoadModel("..\\Data\\Ninja\\忍者.mv1");
+	Player[1].model = MV1LoadModel("..\\Data\\Player\\PC.mv1");
 	Player[1].attachidx = MV1AttachAnim(Player[1].model, 0, gobanim_ntural);
 	Player[1].anim_totaltime = MV1GetAttachAnimTotalTime(Player[1].model, Player[1].attachidx);
 	// アニメーションして動いてもその場で動いてるような状態

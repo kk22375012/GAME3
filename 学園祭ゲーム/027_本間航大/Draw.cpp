@@ -28,6 +28,9 @@ void Draw() {
 		}
 	}
 
+	DrawTriangle3D(PolyCharaHitField[0], PolyCharaHitField[1], PolyCharaHitField[2],
+		GetColor(255, 0, 0), TRUE);
+
 
 //	DrawTriangle3D(PolyCharaHitField[0], PolyCharaHitField[1], PolyCharaHitField[2],
 //		GetColor(255, 0, 0), TRUE);
