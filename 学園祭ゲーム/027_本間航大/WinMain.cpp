@@ -20,7 +20,7 @@ int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 		
 		
 	// カメラポジション cpos:カメラ位置　ctgt:カメラ注視点
-	cpos = VGet(0.0f,1400.0f,0.0f) ;
+	cpos = VGet(0.0f,1000.0f,-2000.0f) ;
 	ctgt = VGet(0.0f,500.0f,-400.0f) ;
 	cadd = VGet(0.0f, 0.0f, 0.0f);
 
@@ -86,11 +86,11 @@ int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 
 
 	// ライトの方向を設定
-	SetLightDirection( VGet( 0.5f, -0.5f, -0.5f ) );
+	SetLightDirection( VGet( 0.5f, -0.5f, 0.5f ) );
 	ShadowMapHandle = MakeShadowMap( 1024, 1024 ) ;
 
 	// シャドウマップが想定するライトの方向もセット
-	SetShadowMapLightDirection( ShadowMapHandle, VGet( 0.5f, -0.5f, -0.5f ) ) ;
+	SetShadowMapLightDirection( ShadowMapHandle, VGet( 0.5f, -0.5f, 0.5f ) ) ;
 
 	// シャドウマップに描画する範囲を設定
 	SetShadowMapDrawArea( ShadowMapHandle, VGet( -5000.0f, -10.0f, -5000.0f ), VGet( 5000.0f, 1000.0f, 5000.0f ) ) ;
@@ -131,7 +131,7 @@ int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 						
 		switch(gamemode){
 			case eSceneBlank :
-				gamemode = eSceneTitle;
+				gamemode = eScenePlay;
 				break;
 
 			case eSceneTitle:
@@ -142,7 +142,7 @@ int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 				break;
 
 			case eSceneChoice:
-				cpos = VGet(0.0f, 1000.0f, -100.0f);
+				cpos = VGet(0.0f, 1000.0f, -1500.0f);
 				ctgt = VGet(0.0f, 500.0f, 0.0f);
 				cadd = VGet(0.0f, 0.0f, 0.0f);
 
@@ -328,11 +328,16 @@ int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 					}
 				}
 
+				MV1SetupCollInfo(StageMap[9][1], -1);
 
+<<<<<<< HEAD
 				// モデルと接触したポリゴンの検出
 				HitPolygonSearch();
 
 				HitDim = MV1CollCheck_Sphere( stagedata, -1, Player[0].pos, CHARA_ENUM_DEFAULT_SIZE + VSize( Player[0].move ) ) ;
+=======
+				HitDim = MV1CollCheck_Sphere(StageMap[9][1], -1, Player[0].pos, CHARA_ENUM_DEFAULT_SIZE + VSize( Player[0].move ) ) ;
+>>>>>>> 41ef0f0ec99aa17962e74ba5344cf793327da0a5
 				WallNum = 0 ;
 				FloorNum = 0 ;
 				// 検出されたポリゴンの数だけ繰り返し
