@@ -70,6 +70,8 @@ int StageMap[MAP_Y][MAP_X] = {
 	{ 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 }
 };
 
+Block m_block;
+
 // マトリックス
 MATRIX WeaponMatrix;
 

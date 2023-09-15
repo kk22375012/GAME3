@@ -146,9 +146,8 @@ void PlayerMove() {
 	}
 */
 	if (CheckHitKey(KEY_INPUT_SPACE) == 1) {
-		printf("aa");
-		Player[0].pos.y += 120.0f;
-		Player[0].move.y = 12.0f;
+		Player[0].pos.y += 30.0f;
+		Player[0].move.y = 40.0f;
 	}
 	if (CheckHitKey(KEY_INPUT_LSHIFT) == 1) {
 		Player[0].move.x *= 2.0f;
