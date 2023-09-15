@@ -80,6 +80,8 @@
 #include "math.h"
 #include <ctime>        // time
 #include <cstdlib>      // srand,rand
+#include "../../../../../Program Files/DxLib/DxLib.h"
+
 /* -----------------------------------------------------------------------------------------
 |
 |       型宣言
@@ -152,7 +154,8 @@ extern void WeaponInit();
 // --- エネミー
 extern void EnemyInit();
 
-// --- 床の当たり判定
+// --- モデルとの当たり判定
+extern void HitPolygonSearch();
 extern int FloorSearch();
 extern void E1_FloorSearch();
 extern int CollisionBlock();

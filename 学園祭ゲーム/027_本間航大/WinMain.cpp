@@ -1,10 +1,14 @@
 
 #include "Common.h"		// --- 全ファイルでの共通ヘッダー
 
+
 int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 	
 	int stagedata_c ;
 	float camera_direction = 0.0f;
+	float LightPositionX = Player[0].pos.x;
+	float LightPositionY = Player[0].pos.y;
+	float LightPositionZ = Player[0].pos.z;
 
 	char str[100];
 	// 全体的なゲームの管理
@@ -40,8 +44,13 @@ int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 	skydata = MV1LoadModel("..\\Data\\Stage\\Stage00_sky.mv1");
 	MV1SetUseZBuffer(skydata, false);
 	// ブロックモデルの読み込み
+
 	blockdate[TATAMI_BLOCK] = MV1LoadModel("..\\Data\\Stage\\たたみ.mv1");
+<<<<<<< HEAD
 	blockcnt = 0;
+=======
+
+>>>>>>> 0de3f2b903735347a72202bf745523f9c3ac7a75
 	// マップデータに反映
 	for (int y = MAP_Y - 1; y >= 0; y--) {
 		for (int x = 0; x < MAP_X; x++) {
@@ -58,6 +67,7 @@ int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 		}
 	}
 
+<<<<<<< HEAD
 	blockcnt = 0;
 
 	for (int y = (MAP_Y - 1); y >= 0; y--) {
@@ -71,6 +81,26 @@ int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 			}
 		}
 	}
+=======
+	// ポイントライト
+//	float Range = 10.0f;			// ライトの有効範囲
+//	float Attenuation0 = 0.1f;
+	//float Atten2 = 0.1f;		
+	ChangeLightTypePoint(VGet(LightPositionX, LightPositionY, LightPositionZ), 10.0f , 0.1f, 0.1f, 0.1f);
+
+	// ライトの方向を設定
+	SetLightDirection(VGet(0.0f, 1.5f, 0.0f));
+	ShadowMapHandle = MakeShadowMap(1024, 1024);
+
+	// シャドウマップが想定するライトの方向もセット
+	SetShadowMapLightDirection( ShadowMapHandle, VGet( 0.5f, -0.5f, -0.5f ) ) ;
+
+	// シャドウマップに描画する範囲を設定
+	SetShadowMapDrawArea( ShadowMapHandle, VGet( -5000.0f, -10.0f, -6000.0f ), VGet( 5000.0f, 1000.0f, 5000.0f ) ) ;
+
+	stagedata_c = MV1LoadModel("..\\Data\\Stage\\Stage00_c.mv1") ;
+	if(stagedata == -1) return -1 ;
+>>>>>>> 0de3f2b903735347a72202bf745523f9c3ac7a75
 
 
 	// シャドウマップハンドルの作成
@@ -88,6 +118,7 @@ int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 
 	stagedata_c = MV1LoadModel("..\\Data\\Stage\\Stage00_c.mv1") ;
 	if(stagedata == -1) return -1 ;
+
 	// モデル全体のコリジョン情報のセットアップ
 	MV1SetupCollInfo( stagedata, -1 ) ;
 
@@ -320,7 +351,18 @@ int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 
 				MV1SetupCollInfo(stagedata, -1);
 
+<<<<<<< HEAD
 				HitDim = MV1CollCheck_Sphere(stagedata, -1, Player[0].pos, CHARA_ENUM_DEFAULT_SIZE + VSize( Player[0].move ) ) ;
+=======
+
+				// モデルと接触したポリゴンの検出
+				HitPolygonSearch();
+
+				HitDim = MV1CollCheck_Sphere( stagedata, -1, Player[0].pos, CHARA_ENUM_DEFAULT_SIZE + VSize( Player[0].move ) ) ;
+
+				HitDim = MV1CollCheck_Sphere(StageMap[9][1], -1, Player[0].pos, CHARA_ENUM_DEFAULT_SIZE + VSize( Player[0].move ) ) ;
+
+>>>>>>> 0de3f2b903735347a72202bf745523f9c3ac7a75
 				WallNum = 0 ;
 				FloorNum = 0 ;
 				// 検出されたポリゴンの数だけ繰り返し
@@ -353,6 +395,7 @@ int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 						}
 					}
 				}
+
 				
 				// 床ポリゴンとの当たり判定
 				if( FloorNum != 0 ){
@@ -414,7 +457,7 @@ int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 
 				// 背景(空)の操作
 				skypos.x = cpos.x;
-				skypos.y = cpos.y - 5000.0f;
+				skypos.y = cpos.y;
 				skypos.z = cpos.z;
 
 				// エネミーの向きの限定

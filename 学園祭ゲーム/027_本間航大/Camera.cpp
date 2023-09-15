@@ -1,4 +1,4 @@
-#include <DxLib.h>
+#include <Dxlib.h>
 
 #include "Common.h"
 
