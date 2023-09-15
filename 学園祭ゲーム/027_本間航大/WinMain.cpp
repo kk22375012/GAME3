@@ -328,7 +328,7 @@ int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 					}
 				}
 
-				MV1SetupCollInfo(StageMap[9][1], -1);
+				MV1SetupCollInfo(StageMap[9][1], -1); 
 
 
 				// ƒ‚ƒfƒ‹‚ÆÚG‚µ‚½ƒ|ƒŠƒSƒ“‚ÌŒŸo
