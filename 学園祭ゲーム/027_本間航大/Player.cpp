@@ -246,6 +246,15 @@ void PlayerMove() {
 				MV1SetAttachAnimTime(Player[0].model, Player[0].attachidx, Player[0].playtime);
 			}
 		*/
+		// ジャンプ　Ｃキー
+			if (key & PAD_INPUT_3) {
+				AnimationPlayer(JUMPIN);
+				Player[0].playtime = 0.0f;
+				Player[0].anim_totaltime = MV1GetAnimTotalTime(Player[0].model, Player[0].attachidx);
+
+				MV1SetAttachAnimTime(Player[0].model, Player[0].attachidx, Player[0].playtime);
+			}
+
 			if (CheckHitKey(KEY_INPUT_SPACE) == 1) {
 				Player[0].move.y = 1200.0f;
 				printf("aaaaaaaa");
