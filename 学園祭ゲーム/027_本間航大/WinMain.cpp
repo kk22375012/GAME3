@@ -58,15 +58,11 @@ int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 		}
 	}
 
-
-
-
 	// ポイントライト
-	Position = VGet(LightPositionX, LightPositionY, LightPositionZ);
-	float Range = 10.0f;			// ライトの有効範囲
-	float Attenuation0 = 0.1f;
+//	float Range = 10.0f;			// ライトの有効範囲
+//	float Attenuation0 = 0.1f;
 	//float Atten2 = 0.1f;		
-//	ChangeLightTypePoint(Position, 10.0f , 0.1f, 0.1f, 0.1f);
+	ChangeLightTypePoint(VGet(LightPositionX, LightPositionY, LightPositionZ), 10.0f , 0.1f, 0.1f, 0.1f);
 
 	// ライトの方向を設定
 	SetLightDirection(VGet(0.0f, 1.5f, 0.0f));
