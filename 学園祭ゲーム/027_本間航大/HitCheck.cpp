@@ -100,4 +100,32 @@ void E1_FloorSearch() {
 	}
 }
 
+int CollisionBlock() {
+	VECTOR cal_pos1 = VAdd(Player[1].pos, VGet(0.0f, PC_HEIGHT, 0.0f));
+	VECTOR cal_pos2 = VAdd(Player[1].pos, VGet(0.0f, -25.0f, 0.0f));
+
+	LineBlock = HitCheck_Line_Cube(cal_pos1, cal_pos2,
+		VGet(Player[0].pos.x - 100.0f, Player[0].pos.y, Player[0].pos.z - 100.0f),
+		VGet(Player[0].pos.x + 100.0f, Player[0].pos.y, Player[0].pos.z + 100.0f));
+
+//		VGet(-200.0f,   0.0f, -200.0f),
+//		VGet( 200.0f, 200.0f,  200.0f));
+
+//		VGet(m_block[0].GetBlockPosition().x - 100.0f, m_block[0].GetBlockPosition().y, m_block[0].GetBlockPosition().z - 100.0f),
+//	VGet(m_block[0].GetBlockTopPosition().x + 100.0f, m_block[0].GetBlockTopPosition().y, m_block[0].GetBlockTopPosition().z + 100.0f));
+
+	// 当たっていなかったら何もしない
+	if (LineBlock.HitFlag == TRUE) {
+		printf("aaaaaaa");
+		// ポリゴンに当たったフラグを立てる
+		HitFlag = 1;
+
+		// 接触したＹ座標を保存する
+		MaxY = LineBlock.Position.y;
+	}
+
+
+	return HitFlag;
+}
+
 

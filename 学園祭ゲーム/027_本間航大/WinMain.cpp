@@ -41,17 +41,36 @@ int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 	MV1SetUseZBuffer(skydata, false);
 	// ブロックモデルの読み込み
 	blockdate[TATAMI_BLOCK] = MV1LoadModel("..\\Data\\Stage\\たたみ.mv1");
+	blockcnt = 0;
 	// マップデータに反映
-	for (int y = 0; y < 10; y++) {
-		for (int x = 0; x < 10; x++) {
+	for (int y = MAP_Y - 1; y >= 0; y--) {
+		for (int x = 0; x < MAP_X; x++) {
 			switch (StageMap[y][x]) {
 				case TATAMI_BLOCK :
-					StageMap[y][x] = MV1DuplicateModel(blockdate[TATAMI_BLOCK]);
+					m_block[blockcnt].b_model = MV1DuplicateModel(blockdate[TATAMI_BLOCK]);
+					m_block[blockcnt].SetMapPositionY( y );
+					m_block[blockcnt].SetMapPositionX( x );
+					m_block[blockcnt].SetBlockFlag( TRUE );
 					break;
 			}
+			if (m_block[blockcnt].GetBlockFlag() == TRUE)
+				blockcnt++;
 		}
 	}
 
+	blockcnt = 0;
+
+	for (int y = (MAP_Y - 1); y >= 0; y--) {
+		for (int x = 0; x < MAP_X; x++) {
+			if (StageMap[y][x] != 0) {
+				MV1SetPosition(m_block[blockcnt].b_model, VGet((x * 200.0f), ((MAP_Y - y) * 200.0f), 0.0f));
+				m_block[blockcnt].SetBlockPosition(VGet((x * 200.0f), ((MAP_Y - y) * 200.0f), 0.0f));
+				m_block[blockcnt].SetBlockTopPosition(m_block[blockcnt].GetBlockPosition());
+				m_block[blockcnt].SetBlockTopPositionY(m_block[blockcnt].GetBlockPosition().y + 200.0f);
+				blockcnt++;
+			}
+		}
+	}
 
 
 	// シャドウマップハンドルの作成
@@ -239,7 +258,7 @@ int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 				}
 				ClearDrawScreen() ;
 				// ここに色々処理を追加する
-				DrawBox(0,0,900,600,GetColor(255,255,255),true) ; //最後の引数をfalseにすると塗りつぶし無し
+//				DrawBox(0,0,900,600,GetColor(255,255,255),true) ; //最後の引数をfalseにすると塗りつぶし無し
 
 				// キャラとヒットチェック
 				if(HitCheck_Capsule_Capsule(VAdd(Player[0].pos,Player[0].move),VAdd(Player[0].pos,Player[0].move),Player[0].charahitinfo.Width / 2,
@@ -299,9 +318,9 @@ int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 					}
 				}
 
-				MV1SetupCollInfo(StageMap[9][1], -1);
+				MV1SetupCollInfo(stagedata, -1);
 
-				HitDim = MV1CollCheck_Sphere(StageMap[9][1], -1, Player[0].pos, CHARA_ENUM_DEFAULT_SIZE + VSize( Player[0].move ) ) ;
+				HitDim = MV1CollCheck_Sphere(stagedata, -1, Player[0].pos, CHARA_ENUM_DEFAULT_SIZE + VSize( Player[0].move ) ) ;
 				WallNum = 0 ;
 				FloorNum = 0 ;
 				// 検出されたポリゴンの数だけ繰り返し
@@ -338,6 +357,7 @@ int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 				// 床ポリゴンとの当たり判定
 				if( FloorNum != 0 ){
 					HitFlag = FloorSearch();
+					HitFlag = CollisionBlock();
 				}
 				// 床ポリゴンに当たったかどうかで処理を分岐
 				if( HitFlag == 1 ){
@@ -420,12 +440,6 @@ int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 				// 地面(配置)
 				MV1SetPosition(stagedata, stagepos);
 				MV1SetPosition(skydata, skypos);
-
-				for (int y = 0; y < MAP_Y; y++) {
-					for (int x = 0; x < MAP_X; x++) {
-						MV1SetPosition(StageMap[y][x], VGet((x * 200.0f), ((MAP_Y - y) * 200.0f), 0.0f));
-					}
-				}
 
 				// 描画
 				Draw();

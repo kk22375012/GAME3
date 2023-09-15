@@ -50,6 +50,7 @@ int E1_HitFlag = FALSE;
 MV1_COLL_RESULT_POLY* Poly;						// ポリゴンの構造体にアクセスするために使用するポインタ( 使わなくても済ませられますがプログラムが長くなるので・・・ )
 HITRESULT_LINE LineRes;							// 線分とポリゴンとの当たり判定の結果を代入する構造体
 HITRESULT_LINE E1_LineRes;
+HITRESULT_LINE LineBlock;
 
 // キャラがヒットした床のポリゴン表示の座標
 VECTOR PolyCharaHitField[3];
@@ -70,7 +71,8 @@ int StageMap[MAP_Y][MAP_X] = {
 	{ 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 }
 };
 
-Block m_block;
+Block m_block[100];
+int blockcnt;
 
 // マトリックス
 MATRIX WeaponMatrix;
@@ -110,6 +112,7 @@ VECTOR cadd;
 // --- 床の当たり判定
 int FloorSearch();
 void E1_FloorSearch();
+int CollisionBlock();
 
 // --- カメラの移動
 void CameraMove();

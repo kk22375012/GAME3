@@ -155,6 +155,7 @@ extern void EnemyInit();
 // --- 床の当たり判定
 extern int FloorSearch();
 extern void E1_FloorSearch();
+extern int CollisionBlock();
 
 // --- カメラの移動
 void CameraMove();
@@ -213,7 +214,7 @@ extern int E1_HitFlag;					// エネミー用ヒットフラグ
 extern MV1_COLL_RESULT_POLY* Poly;		// ポリゴンの構造体にアクセスするために使用するポインタ( 使わなくても済ませられますがプログラムが長くなるので・・・ )
 extern HITRESULT_LINE LineRes;			// 線分とポリゴンとの当たり判定の結果を代入する構造体
 extern HITRESULT_LINE E1_LineRes;
-
+extern HITRESULT_LINE LineBlock;
 
 // キャラがヒットした床のポリゴン表示の座標
 extern VECTOR PolyCharaHitField[3];
@@ -221,7 +222,8 @@ extern float MaxY;
 extern float E1_MaxY;
 
 extern int StageMap[MAP_Y][MAP_X];
-extern Block m_block;
+extern Block m_block[100];
+extern int blockcnt;
 
 // マトリックス
 extern MATRIX WeaponMatrix;

@@ -22,12 +22,12 @@ void Draw() {
 	MV1DrawModel(skydata);
 	MV1DrawModel(stagedata);
 
-	for (int y = 0; y < MAP_Y; y++) {
-		for (int x = 0; x < MAP_X; x++) {
-			MV1DrawModel(StageMap[x][y]);
+	blockcnt = 0;
+	for (blockcnt = 0; blockcnt < 100; blockcnt++) {
+		if (m_block[blockcnt].GetBlockFlag() == TRUE) {
+			MV1DrawModel(m_block[blockcnt].b_model);
 		}
 	}
-
 
 	DrawTriangle3D(PolyCharaHitField[0], PolyCharaHitField[1], PolyCharaHitField[2],
 		GetColor(255, 0, 0), TRUE);
