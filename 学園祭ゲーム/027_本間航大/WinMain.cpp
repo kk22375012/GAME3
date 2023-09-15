@@ -47,7 +47,11 @@ int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 
 	blockdate[TATAMI_BLOCK] = MV1LoadModel("..\\Data\\Stage\\たたみ.mv1");
 <<<<<<< HEAD
+<<<<<<< HEAD
 	blockcnt = 0;
+=======
+
+>>>>>>> 0de3f2b903735347a72202bf745523f9c3ac7a75
 =======
 
 >>>>>>> 0de3f2b903735347a72202bf745523f9c3ac7a75
@@ -82,6 +86,8 @@ int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 		}
 	}
 =======
+=======
+>>>>>>> 0de3f2b903735347a72202bf745523f9c3ac7a75
 	// ポイントライト
 //	float Range = 10.0f;			// ライトの有効範囲
 //	float Attenuation0 = 0.1f;
@@ -100,6 +106,9 @@ int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 
 	stagedata_c = MV1LoadModel("..\\Data\\Stage\\Stage00_c.mv1") ;
 	if(stagedata == -1) return -1 ;
+<<<<<<< HEAD
+>>>>>>> 0de3f2b903735347a72202bf745523f9c3ac7a75
+=======
 >>>>>>> 0de3f2b903735347a72202bf745523f9c3ac7a75
 
 
@@ -360,8 +369,17 @@ int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 
 				HitDim = MV1CollCheck_Sphere( stagedata, -1, Player[0].pos, CHARA_ENUM_DEFAULT_SIZE + VSize( Player[0].move ) ) ;
 
+
+				// モデルと接触したポリゴンの検出
+				HitPolygonSearch();
+
+				HitDim = MV1CollCheck_Sphere( stagedata, -1, Player[0].pos, CHARA_ENUM_DEFAULT_SIZE + VSize( Player[0].move ) ) ;
+
 				HitDim = MV1CollCheck_Sphere(StageMap[9][1], -1, Player[0].pos, CHARA_ENUM_DEFAULT_SIZE + VSize( Player[0].move ) ) ;
 
+<<<<<<< HEAD
+>>>>>>> 0de3f2b903735347a72202bf745523f9c3ac7a75
+=======
 >>>>>>> 0de3f2b903735347a72202bf745523f9c3ac7a75
 				WallNum = 0 ;
 				FloorNum = 0 ;
