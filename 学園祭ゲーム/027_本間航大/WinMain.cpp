@@ -81,7 +81,7 @@ int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 	stagedata_c = MV1LoadModel("..\\Data\\Stage\\Stage00_c.mv1") ;
 	if(stagedata == -1) return -1 ;
 
-=======
+
 	// シャドウマップハンドルの作成
 
 
@@ -97,7 +97,7 @@ int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 
 	stagedata_c = MV1LoadModel("..\\Data\\Stage\\Stage00_c.mv1") ;
 	if(stagedata == -1) return -1 ;
->>>>>>> a7347d45580869c4bc2835f012c9a3eed6d10584
+
 	// モデル全体のコリジョン情報のセットアップ
 	MV1SetupCollInfo( stagedata, -1 ) ;
 
