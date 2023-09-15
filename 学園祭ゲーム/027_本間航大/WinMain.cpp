@@ -299,7 +299,7 @@ int WINAPI WinMain(HINSTANCE hI,HINSTANCE hP,LPSTR lpC,int nC){
 					}
 				}
 
-				MV1SetupCollInfo(StageMap[9][1], -1); 
+				MV1SetupCollInfo(StageMap[9][1], -1);
 
 				HitDim = MV1CollCheck_Sphere(StageMap[9][1], -1, Player[0].pos, CHARA_ENUM_DEFAULT_SIZE + VSize( Player[0].move ) ) ;
 				WallNum = 0 ;

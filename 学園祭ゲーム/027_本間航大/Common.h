@@ -72,6 +72,7 @@
 #include "CharaBase.h"
 #include "StageData.h"
 #include "Animation.h"
+#include "Block.h"
 
 #include "ConsoleWindow.h"	// --- ƒRƒ“ƒ\[ƒ‹ƒEƒBƒ“ƒhƒE
 
@@ -182,7 +183,6 @@ extern SCharaInfo Player[2];
 extern SWeaponInfo PlayerSabel;
 extern int WeponAttachFrameNum;
 
-
 // --- ƒJƒƒ‰
 extern VECTOR cpos;
 extern VECTOR ctgt;
@@ -214,12 +214,14 @@ extern MV1_COLL_RESULT_POLY* Poly;		// ƒ|ƒŠƒSƒ“‚Ì\‘¢‘Ì‚ÉƒAƒNƒZƒX‚·‚é‚½‚ß‚Ég—p‚
 extern HITRESULT_LINE LineRes;			// ü•ª‚Æƒ|ƒŠƒSƒ“‚Æ‚Ì“–‚½‚è”»’è‚ÌŒ‹‰Ê‚ğ‘ã“ü‚·‚é\‘¢‘Ì
 extern HITRESULT_LINE E1_LineRes;
 
+
 // ƒLƒƒƒ‰‚ªƒqƒbƒg‚µ‚½°‚Ìƒ|ƒŠƒSƒ“•\¦‚ÌÀ•W
 extern VECTOR PolyCharaHitField[3];
 extern float MaxY;
 extern float E1_MaxY;
 
 extern int StageMap[MAP_Y][MAP_X];
+extern Block m_block;
 
 // ƒ}ƒgƒŠƒbƒNƒX
 extern MATRIX WeaponMatrix;
